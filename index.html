@@ -3,50 +3,479 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicina Familiar para APS</title>
+    <title>Manual de Supervisión de Salud Infantil</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            line-height: 1.6;
             margin: 0;
-            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f9;
         }
         .container {
-            background-color: #ffffff;
-            padding: 40px 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
         }
-        .btn-link {
-            display: inline-block;
-            padding: 12px 24px;
+        .age-section {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .age-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .age-content {
+            padding: 20px;
+            display: none;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ccc;
+        }
+        .section-subheading {
+            color: #0056b3;
             font-size: 1.1em;
-            color: #ffffff;
-            background-color: #3498db;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            margin-top: 0;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
-        .btn-link:hover {
-            background-color: #2980b9;
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #e9ecef;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .alert-item {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .chevron {
+            transition: transform 0.3s;
+        }
+        .age-header.active .chevron {
+            transform: rotate(90deg);
+        }
+        .cite {
+            color: #6c757d;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-left: 5px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Medicina Familiar para APS</h1>
-    <a href="ninosano.html" class="btn-link">Control Niño Sano</a>
+    <h1>Manual de Supervisión de Salud de Niños</h1>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>Menor de 1 Mes</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Reflejos de búsqueda y succión. Moro simétrico. Posición esgrimista. Reflejo de apoyo, enderezamiento y marcha.<span class="cite">[19, 20, 21, 22, 23]</span></li>
+                <li>**Motor Fino:** Prensión palmar refleja.<span class="cite">[27]</span></li>
+                <li>**Psicosocial:** Fijación ocular (20 días). Sonrisa refleja. Se calma al hablarle.<span class="cite">[28, 29, 31]</span></li>
+                <li>**Lenguaje:** Responde al sonido. Gira la cabeza.<span class="cite">[30, 32]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Marcada hipo o hipertonía. Llanto monótono o continuo. Marcada irritabilidad.<span class="cite">[33]</span></li>
+                <li class="alert-item">Evaluar si la ictericia dura más de 15 días.<span class="cite">[34]</span></li>
+                <li class="alert-item">No recupera el peso de nacimiento a los 20 días.<span class="cite">[36]</span></li>
+            </ul>
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Aumento de peso debe ser mayor a 12 gr/día en las nenas y 15 gr/día en varones.<span class="cite">[40]</span></li>
+                <li>Reflejo rojo simétrico. Movimientos simétricos.<span class="cite">[40, 41]</span></li>
+                <li>Soplos cardíacos, chorro miccional en varones, pulsos femorales.<span class="cite">[41, 42]</span></li>
+                <li>Ortolani y Barlow. Alteraciones del pie. Malformaciones genitales.<span class="cite">[43, 44]</span></li>
+            </ul>
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Lactancia materna a demanda.<span class="cite">[47]</span></li>
+                <li>Vacuna de hepatitis B al nacimiento y BCG.<span class="cite">[49]</span></li>
+                <li>Decúbito dorsal para dormir. Evitar colecho.<span class="cite">[50]</span></li>
+                <li>Viaje seguro en auto: asiento trasero mirando hacia atrás.<span class="cite">[51]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>1 Mes</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Ángulo poplíteo de 90°.<span class="cite">[62]</span></li>
+                <li>**Psicosocial:** Fijación y seguimiento ocular. Sonrisa refleja. Se calma al hablarle y al alzarlo.<span class="cite">[62]</span></li>
+                <li>**Lenguaje:** Responde al sonido y a voces conocidas. Gira la cabeza.<span class="cite">[62]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Falta de respuestas a los sonidos.<span class="cite">[62]</span></li>
+                <li class="alert-item">Depresión puerperal. Alto riesgo psicosocial.<span class="cite">[62]</span></li>
+                <li class="alert-item">Ausencia de fijación ocular.<span class="cite">[62]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>2 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Psicosocial:** Sonrisa social. Se calma al hablarle y al alzarlo.<span class="cite">[80, 82, 84, 86]</span></li>
+                <li>**Lenguaje:** Inicia vocalizaciones; hace eco al que habla.<span class="cite">[95, 96]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Inclusión permanente del pulgar.<span class="cite">[98]</span></li>
+                <li class="alert-item">Falta de respuesta a los sonidos.<span class="cite">[99]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>3 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Sostén cefálico en posición sentada.<span class="cite">[136, 138]</span></li>
+                <li>**Motor Fino:** Puede sostener sonajero.<span class="cite">[135, 137]</span></li>
+                <li>**Lenguaje:** Responde al sonido y a voces conocidas. Algunos ríen a carcajadas.<span class="cite">[141, 142, 144, 145]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Ausencia de contacto visual.<span class="cite">[150]</span></li>
+                <li class="alert-item">Falta de sonrisa social.<span class="cite">[152]</span></li>
+                <li class="alert-item">Falta de sostén cefálico.<span class="cite">[153]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>4 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Sostiene firmemente la cabeza. Balconeo.<span class="cite">[170]</span></li>
+                <li>**Motor Fino:** Manos abiertas en vigilia. Mira las manos y las lleva a la boca. Presión palmar voluntaria.<span class="cite">[170]</span></li>
+                <li>**Psicosocial:** Se ríe a carcajadas. Prefiere a sus padres.<span class="cite">[170]</span></li>
+                <li>**Lenguaje:** Detiene el llanto cuando se le habla. Hace eco del que habla.<span class="cite">[170]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Persistencia de los reflejos arcaicos del primer trimestre (excepto el R. de Moro).<span class="cite">[170]</span></li>
+                <li class="alert-item">Inclusión permanente del pulgar o mano cerrada.<span class="cite">[170]</span></li>
+                <li class="alert-item">Falta de sostén cefálico.<span class="cite">[170]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>5 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Trípode. Balconeo.<span class="cite">[176]</span></li>
+                <li>**Motor Fino:** Junta manos en la línea media y las lleva a la boca. Pasa objetos de una mano a la otra.<span class="cite">[176]</span></li>
+                <li>**Psicosocial:** Le gusta mirarse en el espejo.<span class="cite">[176]</span></li>
+                <li>**Lenguaje:** Balbuceo. Da matices a su llanto y gorjeos comunicando sus emociones.<span class="cite">[176]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Ausencia de fijación ocular. Inclusión permanente del pulgar o mano cerrada.<span class="cite">[176]</span></li>
+                <li class="alert-item">Falta de sonrisa social. Sin respuesta a los sonidos.<span class="cite">[176]</span></li>
+                <li class="alert-item">Falta de organización de los ciclos de sueño. Alto riesgo psicosocial.<span class="cite">[176]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>6 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Trípode. Rola. Sin reflejo de Moro.<span class="cite">[191, 192]</span></li>
+                <li>**Motor Fino:** Prensión dígito palmar. Pasa objetos de una mano a la otra.<span class="cite">[193]</span></li>
+                <li>**Psicosocial:** Empieza ansiedad ante extraños. Se irrita si no se cumple su voluntad.<span class="cite">[194, 196, 200]</span></li>
+                <li>**Lenguaje:** Comienza a usar consonantes en las sílabas. Comienza a imitar sonidos del lenguaje.<span class="cite">[201]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Marcada hipo o hipertonía. Marcada irritabilidad.<span class="cite">[202]</span></li>
+                <li class="alert-item">Demuestra poco interés en la comunicación social. Evita el contacto visual. Sin respuesta a los sonidos.<span class="cite">[202, 203]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>7 y 8 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Se sienta sin apoyo el 80% a los 8 meses. Puede reptar o gatear.<span class="cite">[226]</span></li>
+                <li>**Motor Fino:** Comienza pinza radial inferior. Prensión en tijeras.<span class="cite">[226]</span></li>
+                <li>**Psicosocial:** Ansiedad de separación. Juega a las escondidas. Llora ante extraños.<span class="cite">[226]</span></li>
+                <li>**Lenguaje:** Silabeo no específico. Entiende el no. Comienza a reconocer su nombre.<span class="cite">[226]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Mayor desconfianza ante desconocidos.<span class="cite">[231]</span></li>
+                <li class="alert-item">No tiene interés en manipular objetos.<span class="cite">[234]</span></li>
+                <li class="alert-item">Falta de organización de los ciclos de sueño.<span class="cite">[237]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>9, 10 y 11 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Gatea, camina con apoyo. Se para solo.<span class="cite">[262, 263]</span></li>
+                <li>**Motor Fino:** Pinza digital inferior. Señala con el dedo.<span class="cite">[261, 266]</span></li>
+                <li>**Psicosocial:** Ansiedad de separación. Tira un juguete y espera que lo recojan.<span class="cite">[264, 265]</span></li>
+                <li>**Lenguaje:** Mamá y papá. Primeras palabras con sentido.<span class="cite">[268]</span></li>
+            </ul>
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">No tiene interés en manipular objetos.<span class="cite">[272]</span></li>
+                <li class="alert-item">Demuestra poco interés en la comunicación social. Evita el contacto visual.<span class="cite">[273]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>12 Meses (1 Año)</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Gatea, camina con apoyo o da pasos solo. Se para solo.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Pinza digital superior. Señala con el dedo.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Imita acciones, viene cuando se lo llama. Busca objetos escondidos.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** 3-5 palabras. Comprende órdenes simples.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>15 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Camina solo, se agacha y se levanta. Sube y gatea escaleras arriba.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Primeros garabatos. Bebe de la taza.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Comprende función de objetos, imita tareas. Disfruta el juego simbólico.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Dice 4-6 palabras sueltas. Palabra-frase.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>18 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Camina, trota. Sube escaleras con apoyo. Patea pelota. Arrastra juguetes.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Garabato. Imita trazo vertical. Usa tenedor.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Juego simbólico (80%). Acude al llamado del otro.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Dice 10 a 15 palabras. Dice no. Comprende órdenes simples.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>2 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Corre, sube y baja escaleras con los dos pies. Lanza pelota.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Torre de 6 cubos. Imita líneas, vertical y círculo.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Controla esfínteres (50%). Reconoce su sexo.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Cumple órdenes de dos pasos. Aparece el yo, mi y mío.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>3 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Salta en dos pies. Sube y baja escaleras alternando pies. Pedalea triciclo.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Agarra el lápiz adecuadamente. Dibuja rostro con ojos y boca.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Acepta límites. Puede esperar. Amigo imaginario.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Dice un 75% comprensible. Pregunta y cuenta. Conoce 3 colores.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>4 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Salta en un pie. Baja escaleras alternando pies.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Usa cepillo dental. Figura humana de tres partes. Copia círculo y cruz.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Acepta normas. Va al baño solo. Exploración sexual.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Vocabulario extenso. Entendible para extraños.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>5 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Equilibrio en puntas de pie. Salta la cuerda. Salta con dos pies hacia adelante. Reconoce lado izquierdo y derecho.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Dibuja figura humana de 6 partes. Copia letras y números.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Juego asociativo. Se viste y se desnuda.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Dición correcta. Sabe su nombre, edad y dirección. Cuenta hasta 10 o más. Escribe su nombre.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>6 y 7 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Salta la soga. Trepa. Se baña y peina.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Dibuja figura humana de 12 o más partes. Colorea sin salirse de la línea. Ata sus zapatos.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Miedo a la muerte. Respeta reglas de la escuela. Elige amigos.<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Reconoce alfabeto. Cuenta hasta 20 o más. Escribe con letras de imprenta.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>8 y 9 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>**Motor Grueso:** Mayor destreza y coordinación. Deportes. Nada.<span class="cite">[1]</span></li>
+                <li>**Motor Fino:** Habilidad para actividades complejas. Dibuja la figura humana completa.<span class="cite">[1]</span></li>
+                <li>**Psicosocial:** Etapa de socialización. Toleran mejor frustración. Surgen "grupo de pares".<span class="cite">[1]</span></li>
+                <li>**Lenguaje:** Lenguaje sexual. Resuelve problemas matemáticos. Pensamiento abstracto.<span class="cite">[1]</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>Adolescencia</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <p>Sección detallando las etapas de la adolescencia (Temprana, Intermedia, Tardía) con desarrollo físico, emocional, intelectual y social.<span class="cite">[20]</span></p>
+        </div>
+    </div>
+
 </div>
+
+<script>
+    document.querySelectorAll('.age-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const chevron = header.querySelector('.chevron');
+            const isVisible = content.style.display === 'block';
+
+            // Cierra todas las secciones
+            document.querySelectorAll('.age-content').forEach(c => {
+                c.style.display = 'none';
+            });
+            document.querySelectorAll('.chevron').forEach(c => {
+                c.style.transform = 'rotate(0deg)';
+                c.parentElement.classList.remove('active');
+            });
+
+            // Abre o cierra la sección clicada
+            if (!isVisible) {
+                content.style.display = 'block';
+                chevron.style.transform = 'rotate(90deg)';
+                header.classList.add('active');
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
