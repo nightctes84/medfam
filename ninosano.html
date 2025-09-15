@@ -4,82 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual de Supervisión de Salud Infantil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #50E3C2;
+            --background-light: #F0F4F8;
+            --text-dark: #2C3E50;
+            --text-light: #ECF0F1;
+            --card-bg: #FFFFFF;
+            --border-color: #EAEAEA;
+            --alert-bg: #FEEEEE;
+            --alert-text: #D0021B;
+            --info-bg: #E6F3FF;
+            --info-text: #2C6C9C;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-dark);
         }
+
         .container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
+
         h1 {
-            color: #333;
+            font-weight: 700;
+            color: var(--primary-color);
             text-align: center;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
         }
+
+        h1::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
         .age-section {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
+
         .age-header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 18px 25px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 5px;
-            font-size: 1.2em;
+            font-size: 1.4em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
         }
-        .age-content {
-            padding: 20px;
-            display: none;
-            background-color: #f9f9f9;
-            border-top: 1px solid #ccc;
+
+        .age-header:hover {
+            background-color: #3876C4;
         }
-        .section-subheading {
-            color: #0056b3;
-            font-size: 1.1em;
-            margin-top: 0;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
+
+        .age-header.active {
+            background-color: #3876C4;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background: #e9ecef;
-            margin-bottom: 8px;
-            padding: 10px;
-            border-radius: 4px;
-        }
-        .alert-item {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+
         .chevron {
-            transition: transform 0.3s;
+            font-size: 1.5em;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            line-height: 1;
         }
+
         .age-header.active .chevron {
             transform: rotate(90deg);
         }
+
+        .age-content {
+            padding: 25px;
+            background-color: var(--background-light);
+            display: none;
+        }
+
+        .section-subheading {
+            color: var(--primary-color);
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background: var(--card-bg);
+            margin-bottom: 10px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateY(-2px);
+        }
+
+        .alert-item {
+            background: var(--alert-bg);
+            color: var(--alert-text);
+            border-left: 5px solid #D0021B;
+            box-shadow: none;
+        }
+
+        .alert-item:hover {
+            transform: none;
+        }
+        
         .cite {
-            color: #6c757d;
-            font-size: 0.9em;
+            color: #9B9B9B;
+            font-size: 0.8em;
             font-style: italic;
             margin-left: 5px;
         }
