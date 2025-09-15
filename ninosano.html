@@ -18,8 +18,6 @@
             --border-color: #EAEAEA;
             --alert-bg: #FEEEEE;
             --alert-text: #D0021B;
-            --info-bg: #E6F3FF;
-            --info-text: #2C6C9C;
         }
 
         body {
@@ -148,6 +146,8 @@
         .alert-item:hover {
             transform: none;
         }
+
+        .note { font-size: 0.9em; color: #666; padding-left: 5px; }
     </style>
 </head>
 <body>
@@ -155,7 +155,85 @@
 <div class="container">
     <h1>Manual de Supervisión de Salud de Niños</h1>
 
-    <!-- Ya estaban completas las secciones de <1 mes y 1 mes -->
+    <div class="age-section">
+        <div class="age-header">
+            <span>Menor de 1 Mes</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Reflejos de búsqueda y succión. Moro simétrico. Posición en extensión y flexión alternante.</li>
+                <li>Motor Fino: Prensión palmar refleja.</li>
+                <li>Psicosocial: Fijación ocular, respuesta a la voz, sonrisa refleja.</li>
+                <li>Lenguaje: Responde al sonido, movimientos de succión y deglución presentes.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Marcada hipo o hipertonía, llanto monótono o continuo o irritabilidad marcada.</li>
+                <li class="alert-item">Ictericia que persiste más de 15 días.</li>
+                <li class="alert-item">No recupera el peso de nacimiento a los 20 días.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Medición de peso, longitud y perímetro cefálico.</li>
+                <li>Exploración de piel (ictericia, lesiones), fontanelas y tono muscular.</li>
+                <li>Reflejo rojo, movimientos oculares y simetría de movimientos.</li>
+                <li>Auscultación cardíaca y respiratoria; pulsos periféricos.</li>
+                <li>Examen de caderas (Ortolani/Barlow), genitales y extremidades.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Lactancia materna exclusiva a demanda; apoyo y manejo de la lactancia.</li>
+                <li>Vacunación: Hepatitis B y BCG según esquema local.</li>
+                <li>Sueño seguro: decúbito dorsal, evitar tabaquismo ambiental y objetos en la cuna.</li>
+                <li>Consejos de transporte seguro: asiento trasero mirando hacia atrás.</li>
+                <li>Seguimiento cercano del peso y la alimentación.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>1 Mes</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Reflejos primitivos presentes, postura asimétrica posible, tono variable.</li>
+                <li>Motor Fino: Prensión palmar refleja.</li>
+                <li>Psicosocial: Fijación y seguimiento visual breve, calma con estímulos sociales.</li>
+                <li>Lenguaje: Responde a sonidos y voces, gira la cabeza hacia la fuente sonora.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Ausencia de fijación ocular o falta de respuesta a sonidos.</li>
+                <li class="alert-item">Llanto incontrolable o signos de depresión puerperal en la madre.</li>
+                <li class="alert-item">Signos de infección o dificultad respiratoria.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Control de crecimiento: peso, longitud, perímetro cefálico.</li>
+                <li>Evaluación de fontanelas, reflejo rojo y movimientos oculares.</li>
+                <li>Inspección de piel, cordón umbilical (si presente), genitales y extremidades.</li>
+                <li>Auscultación y palpación general; búsqueda de soplos patológicos.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Mantener lactancia a demanda; apoyo a la madre para toma de peso y técnica.</li>
+                <li>Vacunación según calendario (BCG si no aplicada al nacimiento).</li>
+                <li>Suplemento de vitamina D si corresponde; evitar exposición solar excesiva.</li>
+                <li>Consejos de sueño seguro y prevención de accidentes en el hogar.</li>
+            </ul>
+        </div>
+    </div>
 
     <div class="age-section">
         <div class="age-header">
@@ -165,35 +243,616 @@
         <div class="age-content">
             <h3 class="section-subheading">Desarrollo Madurativo</h3>
             <ul>
-                <li>Motor Grueso: Comienza sostén cefálico parcial.</li>
-                <li>Motor Fino: Movimientos más coordinados de manos.</li>
-                <li>Psicosocial: Sonrisa social, se calma al hablarle y al alzarlo.</li>
-                <li>Lenguaje: Inicia vocalizaciones, hace eco al que habla.</li>
+                <li>Motor Grueso: Mejora del control cefálico en posición sedente sostenida.</li>
+                <li>Motor Fino: Mano más abierta, movimientos más coordinados.</li>
+                <li>Psicosocial: Sonrisa social, busca interacción.</li>
+                <li>Lenguaje: Vocalizaciones simples, inicio de eco de sonidos.</li>
             </ul>
+
             <h3 class="section-subheading">Alertas</h3>
             <ul>
-                <li class="alert-item">Inclusión permanente del pulgar.</li>
-                <li class="alert-item">Falta de respuesta a los sonidos.</li>
+                <li class="alert-item">Persistencia de mano cerrada o inclusión del pulgar.</li>
+                <li class="alert-item">Falta de respuesta a sonidos o ausencia de seguimiento visual.</li>
             </ul>
+
             <h3 class="section-subheading">Examen Físico</h3>
             <ul>
-                <li>Control del crecimiento: peso, talla y perímetro cefálico.</li>
-                <li>Reflejo rojo positivo en ambos ojos.</li>
-                <li>Explorar movilidad de caderas (Ortolani y Barlow).</li>
-                <li>Auscultación cardíaca y pulmonar.</li>
+                <li>Medición de peso, talla y perímetro cefálico.</li>
+                <li>Evaluación neurológica básica: tono, simetría, reflejos primitivos.</li>
+                <li>Revisión de oídos y observación de la respuesta al sonido.</li>
+                <li>Control de caderas y exploración ortopédica simple.</li>
             </ul>
+
             <h3 class="section-subheading">Recomendaciones</h3>
             <ul>
-                <li>Lactancia materna exclusiva a demanda.</li>
-                <li>Continuar suplemento de vitamina D si está indicado.</li>
-                <li>Inmunizaciones: esquema de 2 meses (Pentavalente, Polio, Neumococo, Rotavirus).</li>
-                <li>Consejos de seguridad en el hogar y sueño seguro.</li>
+                <li>Continuar lactancia materna exclusiva y apoyo si hay dificultades.</li>
+                <li>Aplicación de las vacunas del mes 2 según esquema vigente.</li>
+                <li>Promover sueño seguro y medidas de prevención doméstica.</li>
+                <li>Estimulación psicosocial: contacto visual, hablarle y cantarle.</li>
             </ul>
         </div>
     </div>
 
-    <!-- Aquí seguirían 3 meses, 4 meses, 5 meses... hasta adolescencia,
-         todas completadas con Desarrollo, Alertas, Examen Físico y Recomendaciones -->
+    <div class="age-section">
+        <div class="age-header">
+            <span>3 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Sostén de la cabeza en sedestación; inicio de control postural.</li>
+                <li>Motor Fino: Sostiene objetos ligeros como sonajero por breve tiempo.</li>
+                <li>Psicosocial: Sonrisa social consolidada, comienza a mostrar interés por el entorno.</li>
+                <li>Lenguaje: Vocaliza con variedad de sonidos; puede reír a carcajadas.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Ausencia de contacto visual o falta de sonrisa social.</li>
+                <li class="alert-item">Incapacidad para sostener la cabeza brevemente.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Mediciones antropométricas habituales.</li>
+                <li>Exploración neurológica: tono, reflejos, simetría.</li>
+                <li>Revisión de la audición y visión básica (respuesta a estímulos).</li>
+                <li>Chequeo de desarrollo motor y exploración de caderas.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Continuar lactancia y alimentación adecuada; inicio de orientación sobre introducción de alimentos futuros.</li>
+                <li>Estimulación: juegos que promuevan seguimiento visual y manipulación.</li>
+                <li>Vacunas y controles según calendario local.</li>
+                <li>Control del sueño y rutinas diarias para favorecer organización de ciclos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>4 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Sostiene firmemente la cabeza; comienza a apoyarse en las manos en prono.</li>
+                <li>Motor Fino: Manos abiertas, busca objetos con la mirada y los lleva a la boca.</li>
+                <li>Psicosocial: Ríe y muestra preferencia por cuidadores.</li>
+                <li>Lenguaje: Balbuceo y eco de sonidos.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Persistencia de reflejos arcaicos en exceso o ausencia de control cefálico.</li>
+                <li class="alert-item">Mano permanentemente cerrada o falta de interacción social.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Medición de peso, longitud y perímetro cefálico.</li>
+                <li>Evaluación neurológica: tono y simetría, búsqueda de asimetrías.</li>
+                <li>Exploración oral, oídos, ojos y caderas.</li>
+                <li>Revisión de la piel y control nutricional.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Continuar lactancia y apoyo a la alimentación.</li>
+                <li>Estimulación sensorial: juego, contacto piel con piel y conversación.</li>
+                <li>Vacunas según calendario y control del crecimiento.</li>
+                <li>Consejos de seguridad y prevención de caídas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>5 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Apoyo en manos, se incorpora con ayuda (trípode).</li>
+                <li>Motor Fino: Lleva manos a la línea media, pasa objetos de una mano a otra.</li>
+                <li>Psicosocial: Interés por el espejo y el entorno.</li>
+                <li>Lenguaje: Balbuceo más variado; diferenciación de llantos.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Falta de fijación ocular o ausencia de balbuceo.</li>
+                <li class="alert-item">Problemas persistentes en organización del sueño o riesgo psicosocial.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Medición antropométrica y revisión del desarrollo psicomotor.</li>
+                <li>Exploración de la motricidad fina y fuerza de prensión.</li>
+                <li>Inspección auditiva y visual simple; revisión de la piel y mucosas.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Estimulación manual y juegos que promuevan la transferencia de objetos.</li>
+                <li>Continuar con vacunas y controles periódicos.</li>
+                <li>Orientación sobre la incorporación de alimentos sólidos cuando corresponda.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>6 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Se sienta con apoyo, puede rodar (rola) y los reflejos arcaicos disminuyen.</li>
+                <li>Motor Fino: Prensión dígito-palmar; pasa objetos entre manos.</li>
+                <li>Psicosocial: Ansiedad ante extraños comienza; expresa frustración.</li>
+                <li>Lenguaje: Emite consonantes y comienza a imitar sonidos.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Marcada hipo o hipertonía, rechazo persistente al contacto social.</li>
+                <li class="alert-item">No responde a sonidos o muestra poca interacción comunicativa.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y control del perímetro cefálico.</li>
+                <li>Pruebas de tono y coordinación; examen de la vista y audición.</li>
+                <li>Control de la cavidad oral y estado nutricional.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Introducción gradual de alimentos complementarios si está indicado, manteniendo lactancia materna.</li>
+                <li>Estimulación social y juegos de imitación.</li>
+                <li>Vacunación según calendario y control del crecimiento.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>7 y 8 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Se sienta sin apoyo alrededor de los 8 meses; puede reptar o gatear.</li>
+                <li>Motor Fino: Pinza radial inferior aparece; prensión en tijeras.</li>
+                <li>Psicosocial: Ansiedad de separación; juegos sencillos de esconder.</li>
+                <li>Lenguaje: Silabeo no específico; reconoce su nombre y entiende "no".</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Poco interés por manipular objetos o falta de respuesta social.</li>
+                <li class="alert-item">Desorganización severa del sueño o signos de riesgo psicosocial.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y evaluación motora completa.</li>
+                <li>Exploración ortopédica (caderas, pies) y neurológica básica.</li>
+                <li>Chequeo auditivo y visual según recursos disponibles.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Estimulación con juguetes adecuados para desarrollar pinza y coordinación.</li>
+                <li>Fomentar la interacción social y la respuesta a su nombre.</li>
+                <li>Continuar con las vacunas y los controles del crecimiento.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>9, 10 y 11 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Gatea, se incorpora con apoyo, puede ponerse de pie y caminar con apoyo.</li>
+                <li>Motor Fino: Pinza digital inferior; comienza a señalar con el índice.</li>
+                <li>Psicosocial: Juegos repetitivos, espera que recojan el juguete, muestra ansiedad por separación.</li>
+                <li>Lenguaje: Emite palabras simples; "mamá" y "papá" pueden aparecer.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Falta de manipulación de objetos o ausencia de comunicación intencional.</li>
+                <li class="alert-item">Evita contacto visual o no responde a estímulos sociales.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Mediciones antropométricas; observación de la marcha apoyada.</li>
+                <li>Exploración neurológica y ortopédica; evaluación de la audición y visión.</li>
+                <li>Revisión dental inicial y estado nutricional.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Estimulación del lenguaje con lectura y conversación.</li>
+                <li>Alimentación adecuada: progresión de texturas seguras.</li>
+                <li>Vacunas y control del crecimiento.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>12 Meses (1 Año)</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Camina con o sin ayuda; se pone de pie solo.</li>
+                <li>Motor Fino: Pinza digital superior; señala objetos.</li>
+                <li>Psicosocial: Imitación de acciones, busca objetos ocultos.</li>
+                <li>Lenguaje: 3-5 palabras con significado; responde a órdenes simples.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">No intenta caminar o falta de interacción social significativa.</li>
+                <li class="alert-item">No produce palabras con significado.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Control de peso, talla y perímetro cefálico.</li>
+                <li>Evaluación motor fino y grueso; exploración ortopédica.</li>
+                <li>Revisión bucal y dentición incipiente.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Promover juego libre y lectura diaria sencilla.</li>
+                <li>Alimentación adecuada y supervisada; prevención de atragantamiento.</li>
+                <li>Vacunación de refuerzo según calendario.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>15 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Camina solo, se agacha y se levanta, sube escaleras apoyándose.</li>
+                <li>Motor Fino: Primeros garabatos; bebe de vaso con ayuda.</li>
+                <li>Psicosocial: Juego simbólico simple, imita tareas.</li>
+                <li>Lenguaje: 4-6 palabras sueltas; combinaciones sencillas.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Retroceso en habilidades motoras o sociales.</li>
+                <li class="alert-item">Ausencia de palabras ni intento de comunicación.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y exploración general.</li>
+                <li>Evaluación del desarrollo del lenguaje y social.</li>
+                <li>Control de visión y audición según sospecha.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Fomentar la autonomía en la alimentación y el juego.</li>
+                <li>Promover actividades que desarrollen la motricidad fina.</li>
+                <li>Vacunas y controles periódicos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>18 Meses</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Corre, sube escaleras con apoyo, patea pelota.</li>
+                <li>Motor Fino: Garabatos más intencionales; imita trazos verticales.</li>
+                <li>Psicosocial: Juego simbólico evidente; mayor interacción social.</li>
+                <li>Lenguaje: 10-15 palabras; comprensión de órdenes simples.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Retroceso en habilidades adquiridas o aislamiento social.</li>
+                <li class="alert-item">Falta de progresión del lenguaje.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y examen general.</li>
+                <li>Valoración neurológica y exploración del desarrollo.</li>
+                <li>Evaluación de audición y visión si hay sospecha.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Estimular el lenguaje con lectura y canciones.</li>
+                <li>Fomentar el juego social y la autonomía.</li>
+                <li>Seguir calendario de vacunación y controles nutricionales.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>2 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Corre, sube y baja escaleras con ambos pies, lanza pelota.</li>
+                <li>Motor Fino: Construye torre de cubos (aprox. 6), imita líneas y círculos.</li>
+                <li>Psicosocial: Comienza control de esfínteres parcial; juego paralelo.</li>
+                <li>Lenguaje: Frases simples, órdenes de dos pasos, uso de pronombres básicos.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">No habla palabras comprensibles o no responde a órdenes sencillas.</li>
+                <li class="alert-item">Problemas motores que impidan correr o subirse.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Medición de peso, talla y exploración general.</li>
+                <li>Evaluación de marcha, equilibrio y coordinación.</li>
+                <li>Revisión de la audición, visión y dentición.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Estimular el lenguaje a través del juego y lectura diaria.</li>
+                <li>Promover actividades físicas y seguridad en el hogar.</li>
+                <li>Vacunación y seguimiento del desarrollo.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>3 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Salta con dos pies, sube y baja escaleras alternando pies, pedalea triciclo.</li>
+                <li>Motor Fino: Agarra el lápiz adecuadamente, dibuja rostro con ojos y boca.</li>
+                <li>Psicosocial: Acepta límites, juega con otros, posible amigo imaginario.</li>
+                <li>Lenguaje: 75% comprensible, hace preguntas y cuenta pequeños eventos.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">No presenta lenguaje funcional o no interactúa con pares.</li>
+                <li class="alert-item">Dificultades motoras persistentes.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y evaluación de desarrollo motor y del lenguaje.</li>
+                <li>Exploración de la visión y audición; revisión ortopédica.</li>
+                <li>Chequeo del desarrollo social y alimentación.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Estimulación del lenguaje y juego social estructurado.</li>
+                <li>Promover actividad física diaria y rutinas.</li>
+                <li>Revisión de vacunas y controles escolares.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>4 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Salta en un pie, baja escaleras alternando pies.</li>
+                <li>Motor Fino: Usa cepillo dental, copia círculo y cruz, figura humana básica.</li>
+                <li>Psicosocial: Mayor autonomía, acepta normas, exploración de roles.</li>
+                <li>Lenguaje: Vocabulario amplio, comprensible para extraños.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Dificultad para comunicarse o interactuar con pares.</li>
+                <li class="alert-item">Problemas motores que limiten juego habitual.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Mediciones y examen físico general.</li>
+                <li>Revisión dental, visión y audición.</li>
+                <li>Consejería sobre higiene, sueño y seguridad.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Fomentar la independencia en el autocuidado.</li>
+                <li>Promover actividades motoras y juego cooperativo.</li>
+                <li>Vacunas y controles escolares periódicos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>5 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Equilibrio en puntas, salta la cuerda, reconoce lateralidad.</li>
+                <li>Motor Fino: Dibuja figura humana más detallada, copia letras y números.</li>
+                <li>Psicosocial: Juego asociativo, se viste y se desviste solo.</li>
+                <li>Lenguaje: Dicción correcta, cuenta hasta 10, escribe su nombre.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Retraso en habilidades de la edad o dificultades en la comprensión.</li>
+                <li class="alert-item">Problemas conductuales que limitan integración social.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Mediciones y evaluación del desarrollo cognitivo y motor.</li>
+                <li>Revisión dental, audición y visión; ortopedia básica.</li>
+                <li>Consejería nutricional y de hábitos de sueño.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Apoyo en lectoescritura temprana con juegos y actividades.</li>
+                <li>Promover deportes y actividad física regular.</li>
+                <li>Vacunas de ingreso escolar y controles periódicos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>6 y 7 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Mejora la coordinación, salta la soga, se baña y peina solo.</li>
+                <li>Motor Fino: Dibuja figuras más complejas, ata sus zapatos.</li>
+                <li>Psicosocial: Respeta reglas, establece amistades.</li>
+                <li>Lenguaje: Reconoce alfabeto y números, escritura inicial.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Dificultades escolares notorias o problemas de conducta persistentes.</li>
+                <li class="alert-item">Retraso en habilidades motoras finas o gruesas.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y examen general; valoración de postura y columna.</li>
+                <li>Revisión de la vista, audición y desarrollo escolar.</li>
+                <li>Consejería sobre actividad física y prevención de accidentes.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Fomentar lectura y tareas que desarrollen la atención.</li>
+                <li>Promover deportes y hábitos de sueño saludables.</li>
+                <li>Vacunas de refuerzo según esquema y controles escolares.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>8 y 9 Años</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Motor Grueso: Mayor destreza y coordinación; práctica de deportes y natación.</li>
+                <li>Motor Fino: Habilidades para actividades complejas y artísticas.</li>
+                <li>Psicosocial: Integración en grupo de pares; manejo de frustración.</li>
+                <li>Lenguaje: Pensamiento más abstracto; mayor comprensión lectora.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Problemas de socialización o rendimiento escolar significativo.</li>
+                <li class="alert-item">Dificultades en coordinación o habilidades motoras.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría y valoración del desarrollo psicomotor avanzado.</li>
+                <li>Evaluación de la vista y audición, revisión ortopédica si es necesario.</li>
+                <li>Consejería sobre actividad física, alimentación y sueño.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Incentivar deportes y actividades recreativas en grupo.</li>
+                <li>Apoyo escolar y detección temprana de dificultades de aprendizaje.</li>
+                <li>Vacunas y chequeos periódicos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="age-section">
+        <div class="age-header">
+            <span>Adolescencia</span>
+            <span class="chevron">&#9654;</span>
+        </div>
+        <div class="age-content">
+            <h3 class="section-subheading">Desarrollo Madurativo</h3>
+            <ul>
+                <li>Etapas: temprana, intermedia y tardía; cambios puberales físicos, emocionales e intelectuales.</li>
+                <li>Desarrollo sexual: aparición de caracteres sexuales secundarios según sexo.</li>
+                <li>Psicosocial: Búsqueda de identidad, mayor independencia y presión de pares.</li>
+            </ul>
+
+            <h3 class="section-subheading">Alertas</h3>
+            <ul>
+                <li class="alert-item">Signos de depresión, ideación suicida o conductas de riesgo.</li>
+                <li class="alert-item">Inicio precoz o retrasado de la pubertad según parámetros locales.</li>
+                <li class="alert-item">Consumo de sustancias, conducta sexual de riesgo o violencia.</li>
+            </ul>
+
+            <h3 class="section-subheading">Examen Físico</h3>
+            <ul>
+                <li>Antropometría; valoración del desarrollo puberal (estadios de Tanner).</li>
+                <li>Evaluación de la salud mental y hábitos (sueño, dieta, actividad física).</li>
+                <li>Exploración de mamas/genitales si corresponde y educación sobre salud sexual.</li>
+            </ul>
+
+            <h3 class="section-subheading">Recomendaciones</h3>
+            <ul>
+                <li>Consejería sobre sexualidad responsable, anticoncepción y prevención de ETS.</li>
+                <li>Atención a salud mental: detección temprana de trastornos y derivación si es necesario.</li>
+                <li>Promover actividad física regular, buena nutrición y sueño adecuado.</li>
+                <li>Vacunaciones indicadas para la edad (por ej. HPV si corresponde por calendario).</li>
+            </ul>
+        </div>
+    </div>
 
 </div>
 
@@ -204,6 +863,7 @@
             const chevron = header.querySelector('.chevron');
             const isVisible = content.style.display === 'block';
 
+            // Cierra todas las secciones
             document.querySelectorAll('.age-content').forEach(c => {
                 c.style.display = 'none';
             });
@@ -212,6 +872,7 @@
                 c.parentElement.classList.remove('active');
             });
 
+            // Abre o cierra la sección clicada
             if (!isVisible) {
                 content.style.display = 'block';
                 chevron.style.transform = 'rotate(90deg)';
