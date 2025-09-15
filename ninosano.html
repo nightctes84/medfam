@@ -69,18 +69,18 @@
             transition: all 0.3s ease;
         }
 
-        .age-header {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 18px 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.4em;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
+       .age-header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 18px 25px;
+    cursor: pointer;
+    display: flex;
+    /* Elimina 'justify-content: space-between;' */
+    align-items: center; /* Asegura que estén centrados verticalmente */
+    font-size: 1.4em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
 
         .age-header:hover {
             background-color: #3876C4;
@@ -93,11 +93,12 @@
         }
 
         .chevron {
-            font-size: 1.5em;
-            font-weight: 700;
-            transition: transform 0.3s ease;
-            line-height: 1;
-        }
+    font-size: 1.5em;
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    line-height: 1;
+    margin-left: auto; /* Esto empuja la flecha hacia la derecha */
+}
 
         .age-header.active .chevron {
             transform: rotate(90deg);
