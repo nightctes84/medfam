@@ -4,11 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicina Familiar Herramientas</title>
+    <style>
+        /* Reset básico y fuente moderna */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5; /* Fondo gris suave moderno */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Centra verticalmente */
+        }
+
+        /* Contenedor tipo tarjeta */
+        .card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        /* Contenedor de los botones */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espacio entre botones */
+        }
+
+        /* Estilo de los botones (Enlaces con aspecto de botón) */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Color específico para Niño Sano (Azul) */
+        .btn-nino {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        /* Color específico para CPN (Verde/Teal) */
+        .btn-cpn {
+            background: linear-gradient(135deg, #1abc9c, #16a085);
+        }
+
+        /* Efecto Hover (al pasar el mouse) */
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            opacity: 0.95;
+        }
+
+        /* Efecto al hacer click */
+        .btn:active {
+            transform: translateY(0);
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Medicina Familiar Herramientas</h1>
-    <a href="ninosano.html">
-        <button>CONTROL NIÑO SANO</button>
-    </a>
+
+    <div class="card">
+        <h1>Medicina Familiar<br>Herramientas</h1>
+        
+        <div class="button-container">
+            <a href="ninosano.html" class="btn btn-nino">
+                Control Niño Sano
+            </a>
+
+            <a href="Cronologia_CPN.html" class="btn btn-cpn">
+                CPN (Control Prenatal)
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>
