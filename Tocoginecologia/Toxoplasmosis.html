@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmos de Diagnóstico - Toxoplasmosis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #7f8c8d;
+            transition: 0.3s;
+        }
+        .tab-btn.active {
+            color: #2980b9;
+            border-bottom: 3px solid #2980b9;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .step-box {
+            background: #ecf0f1;
+            border-left: 5px solid #2980b9;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .condition {
+            font-weight: bold;
+            color: #c0392b;
+        }
+        .result {
+            font-style: italic;
+            color: #27ae60;
+            display: block;
+            margin-top: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #2980b9;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Interpretación de Pruebas Serológicas</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'general')">Algoritmo General</button>
+        <button class="tab-btn" onclick="openTab(event, 'embarazada')">Mujer Embarazada</button>
+    </div>
+
+    <div id="general" class="tab-content active">
+        <h2>Diagnóstico Serológico Toxoplasmosis</h2>
+        <p>Paso inicial: Realizar IgG e IgM.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Resultado</th>
+                    <th>Interpretación / Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="condition">IgG (-) / IgM (+)</td>
+                    <td>Sospecha alta de infección aguda. Repetir ambas en 15 días.</td>
+                </tr>
+                <tr>
+                    <td class="condition">IgG (+) / IgM (+)</td>
+                    <td>No confirma infección aguda. Realizar <strong>Avidez de IgG</strong>.</td>
+                </tr>
+                <tr>
+                    <td class="condition">IgG (-) / IgM (-)</td>
+                    <td>Sin evidencia de infección.</td>
+                </tr>
+                <tr>
+                    <td class="condition">IgG (+) / IgM (-)</td>
+                    <td>Infección hace más de 1 año.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="step-box">
+            <strong>Resultados de Avidez (para IgG+ e IgM+):</strong>
+            <ul>
+                <li><strong>Avidez Alta:</strong> Descarta infección reciente.</li>
+                <li><strong>Avidez Baja:</strong> Sospecha de infección reciente.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="embarazada" class="tab-content">
+        <h2>Algoritmo de la Mujer Embarazada</h2>
+        <p>Determinación inicial de IgG e IgM (AD; IFI; ELISA; ISAGA).</p>
+
+        <div class="step-box">
+            <span class="condition">IgG (-) / IgM (-)</span>
+            <span class="result">Ausencia de infección. Control bimestral y medidas de prevención.</span>
+        </div>
+
+        <div class="step-box">
+            <span class="condition">IgG (+) / IgM (-)</span>
+            <span class="result">Infección pasada.</span>
+        </div>
+
+        <div class="step-box">
+            <span class="condition">IgG (+) / IgM (+)</span>
+            <p>Probable infección aguda. <strong>Determinación de Avidez</strong>:</p>
+            <ul>
+                <li><strong>Avidez Baja:</strong> Infección reciente.</li>
+                <li><strong>Avidez Alta:</strong> Infección pasada.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
