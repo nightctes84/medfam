@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Pediatría</title>
+    <style>
+        /* Estilos Modernos */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f7f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .container-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .boton-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background-color: #ffffff;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        /* Efecto al pasar el mouse */
+        .boton-menu:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            border-color: #3498db;
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* Iconos o Variaciones (opcional) */
+        .boton-menu:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Módulo de Pediatría</h1>
+
+    <div class="container-menu">
+        <a href="Cronologia_CPN.html" class="boton-menu">CPN</a>
+        
+        <a href="mac_embarazo.html" class="boton-menu">MAC</a>
+        
+        <a href="Sifilis.html" class="boton-menu">Sifilis</a>
+        
+        <a href="Itu.html" class="boton-menu">ITU</a>
+        
+        <a href="Cancer Cuello.html" class="boton-menu">Cancer cuello</a>
+    </div>
+
+</body>
+</html>

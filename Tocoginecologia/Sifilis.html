@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abordaje Clínico: Sífilis y Medicina Familiar</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--secondary);
+        }
+
+        .card-diagnostic { border-top-color: var(--secondary); }
+        .card-treatment { border-top-color: var(--success); }
+        .card-followup { border-top-color: var(--warning); }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .algo-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .step {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th { background: #f9f9f9; }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .bg-danger { background-color: var(--danger); }
+        .bg-success { background-color: var(--success); }
+
+        .btn-home {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-home:hover { background: #1a252f; }
+
+        .highlight-box {
+            background: #fff4e5;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Gestión Clínica en Consultorio</h1>
+        <p>Enfoque en Sífilis (Guía 2024) y Atención Integral</p>
+    </header>
+
+    <div class="grid">
+        
+        <div class="card card-diagnostic">
+            <h2>🔍 Algoritmo de Diagnóstico</h2>
+            <div class="algo-box">
+                <p><span class="step">Paso 1:</span> Realizar <strong>Prueba No Treponémica (PNT)</strong>: VDRL o RPR.</p>
+                <ul>
+                    <li><strong>No Reactiva:</strong> Descarta (salvo sospecha de chancro primario en ventana).</li>
+                    <li><strong>Reactiva:</strong> Pasar al Paso 2.</li>
+                </ul>
+                <p><span class="step">Paso 2:</span> Realizar <strong>Prueba Treponémica (PT)</strong>: Prueba Rápida, FTA-abs o TPPA.</p>
+                <ul>
+                    <li><strong>PT (+):</strong> Diagnóstico confirmado.</li>
+                    <li><strong>PT (-):</strong> Probable falso positivo de la VDRL.</li>
+                </ul>
+            </div>
+            <small>* Si no se dispone de PT, tratar con VDRL reactiva ante sospecha clínica o imposibilidad de seguimiento.</small>
+        </div>
+
+        <div class="card card-treatment">
+            <h2>💊 Esquemas de Tratamiento</h2>
+            <p>Medicamento: <strong>Penicilina G Benzatínica</strong> (vía IM).</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estadio Clínico</th>
+                        <th>Dosis IM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primaria, Secundaria o Latente Temprana</strong> (&lt; 1 año)</td>
+                        <td>2.400.000 UI <br><span class="badge bg-success">1 DOSIS</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Latente Tardía</strong> (&gt; 1 año o desconocida)</td>
+                        <td>2.400.000 UI <br><span class="badge bg-danger">3 DOSIS</span> (1 por semana)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="highlight-box">
+                <strong>Alternativa (No Embarazadas):</strong> Doxiciclina 100mg cada 12h VO (14 días para temprana / 28 días para tardía).• Ceftriaxona 1 gramo/día intramuscular o endovenoso por 14 días.
+• Azitromicina 2 gramos vía oral (única dosis).
+            </div>
+        </div>
+
+        <div class="card card-followup">
+            <h2>📈 Seguimiento Post-Tratamiento</h2>
+            <p><span class="step">Criterio de Curación:</span> Descenso de los títulos en <strong>2 diluciones</strong> (ej: de 1:32 a 1:8 o de 1:16 a 1:4).</p>
+            
+            <span class="step">Frecuencia de Controles (VDRL):</span>
+            <ul>
+                <li><strong>Población General:</strong> 6 y 12 meses.</li>
+                <li><strong>Personas con VIH:</strong> 3, 6, 9 y 12 meses.</li>
+                <li><strong>Embarazadas:</strong> Mensual hasta el parto.</li>
+            </ul>
+
+            <div class="highlight-box" style="background-color: #e8f6f3; border-left-color: #27ae60;">
+                <strong>Importante:</strong> Notificar el caso y tratar a los contactos estrechos de los últimos 90 días, independientemente de su serología.
+            </div>
+        </div>
+
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="btn-home">← Volver al Menú Principal</a>
+    </div>
+</div>
+
+</body>
+</html>
