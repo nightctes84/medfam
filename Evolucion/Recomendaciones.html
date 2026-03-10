@@ -143,19 +143,21 @@
     // Función de envío
     function enviarWA(id) {
     const mensaje = document.getElementById(id).innerText;
-    let telefono = prompt("Número del paciente (ej: 54911...):");
+    let telefono = prompt("Ingrese el número (549 + área sin 0 + número sin 15):", "549");
 
     if (telefono !== null && telefono !== "") {
-        telefono = telefono.replace(/\D/g, '');
-        
+        // Limpiamos espacios y guiones
+        telefono = telefono.replace(/\D/g, ''); 
+
         // Codificamos el mensaje
         const textoCodificado = encodeURIComponent("*Indicaciones Médicas:*\n\n" + mensaje);
         
-        // CAMBIO CLAVE: Usamos el protocolo directo de la App
-        // Esto busca abrir la aplicación instalada en lugar del navegador
-        const urlDirecta = `whatsapp://send?phone=${telefono}&text=${textoCodificado}`;
+        // Usamos api.whatsapp.com que es el más estable
+        const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${textoCodificado}`;
         
-        window.location.href = urlDirecta; 
+        // CAMBIO IMPORTANTE: Usamos location.href en lugar de window.open
+        // Esto hace que la misma pestaña salte a WhatsApp, evitando bloqueos de popups.
+        window.location.href = url;
     }
 }
 </script>
