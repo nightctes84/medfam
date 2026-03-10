@@ -142,16 +142,22 @@
 
     // Función de envío
     function enviarWA(id) {
-        const mensaje = document.getElementById(id).innerText;
-        let telefono = prompt("Número del paciente (con código de país, ej: 54911...):");
+    const mensaje = document.getElementById(id).innerText;
+    let telefono = prompt("Número del paciente (ej: 54911...):");
 
-        if (telefono !== null && telefono !== "") {
-            // Limpiar el número de caracteres no numéricos
-            telefono = telefono.replace(/\D/g, '');
-            const url = `https://wa.me/${telefono}?text=${encodeURIComponent("*Indicaciones Médicas:*\n\n" + mensaje)}`;
-            window.open(url, '_blank');
-        }
+    if (telefono !== null && telefono !== "") {
+        telefono = telefono.replace(/\D/g, '');
+        
+        // Codificamos el mensaje
+        const textoCodificado = encodeURIComponent("*Indicaciones Médicas:*\n\n" + mensaje);
+        
+        // CAMBIO CLAVE: Usamos el protocolo directo de la App
+        // Esto busca abrir la aplicación instalada en lugar del navegador
+        const urlDirecta = `whatsapp://send?phone=${telefono}&text=${textoCodificado}`;
+        
+        window.location.href = urlDirecta; 
     }
+}
 </script>
 
 </body>
