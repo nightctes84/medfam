@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Plantillas Médicas</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --whatsapp: #25d366;
+            --bg: #f0f2f5;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: auto; }
+        
+        h1 { text-align: center; color: var(--primary); }
+
+        /* Buscador */
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            display: block;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-box:focus { border-color: var(--secondary); }
+
+        /* Grid de Tarjetas */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 6px solid var(--secondary);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        
+        /* Ocultar tarjeta si no coincide con búsqueda */
+        .hidden { display: none; }
+
+        .card h2 { margin: 0 0 15px 0; color: var(--secondary); font-size: 1.25rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+
+        .text-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            color: #444;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        .btn-whatsapp:hover { opacity: 0.85; }
+
+        @media (max-width: 500px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Plantillas de Evolución y Recomendaciones</h1>
+
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Buscar patología (ej: Faringitis, Sarna...)" onkeyup="filterCards()">
+
+    <div class="grid-container" id="gridCards">
+
+        <div class="card">
+            <h2>Faringitis</h2>
+            <div class="text-content" id="t1">Paciente con odinofagia y fiebre. Se indica:
+- Abundante hidratación.
+- Reposo deportivo por 48hs.
+- Gárgaras con solución salina.
+- Control de temperatura.</div>
+            <button class="btn-whatsapp" onclick="enviarWA('t1')">Enviar a WhatsApp</button>
+        </div>
+
+        <div class="card">
+            <h2>Escabiosis (Sarna)</h2>
+            <div class="text-content" id="t2">Indicaciones para el hogar:
+- Tratamiento familiar simultáneo.
+- Lavado de ropa de cama a 60°C.
+- Aplicar permetrina al 5% desde el cuello a pies.
+- Repetir a los 7 días.</div>
+            <button class="btn-whatsapp" onclick="enviarWA('t2')">Enviar a WhatsApp</button>
+        </div>
+
+        <div class="card">
+            <h2>Broncoespasmo</h2>
+            <div class="text-content" id="t3">Plan de rescate:
+- Salbutamol: 2 disparos cada 4-6 horas.
+- Uso de aerocámara obligatorio.
+- Consultar si hay hundimiento de costillas o labios morados.</div>
+            <button class="btn-whatsapp" onclick="enviarWA('t3')">Enviar a WhatsApp</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Función de búsqueda
+    function filterCards() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.getElementsByClassName('card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+            if (title.includes(input)) {
+                cards[i].classList.remove('hidden');
+            } else {
+                cards[i].classList.add('hidden');
+            }
+        }
+    }
+
+    // Función de envío
+    function enviarWA(id) {
+        const mensaje = document.getElementById(id).innerText;
+        let telefono = prompt("Número del paciente (con código de país, ej: 54911...):");
+
+        if (telefono !== null && telefono !== "") {
+            // Limpiar el número de caracteres no numéricos
+            telefono = telefono.replace(/\D/g, '');
+            const url = `https://wa.me/${telefono}?text=${encodeURIComponent("*Indicaciones Médicas:*\n\n" + mensaje)}`;
+            window.open(url, '_blank');
+        }
+    }
+</script>
+
+</body>
+</html>
