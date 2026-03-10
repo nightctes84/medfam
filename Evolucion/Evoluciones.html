@@ -6,31 +6,47 @@
     <title>Gestor de Evoluciones Médicas</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; color: #333; padding: 20px; }
-        .container { max-width: 900px; margin: auto; }
+        
         h1 { text-align: center; color: #2c3e50; margin-bottom: 30px; }
+
+        /* Contenedor en GRID para aprovechar el espacio lateral */
+        .grid-container { 
+            display: grid; 
+            /* Crea columnas de mínimo 400px, si no caben, se ponen una abajo de otra */
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+            gap: 20px; 
+            max-width: 1400px; /* Aumentado para pantallas anchas */
+            margin: auto; 
+        }
         
         /* Tarjetas */
         .card { 
-            background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; 
+            background: white; border-radius: 12px; padding: 20px; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 6px solid #3498db;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column; /* Alinea contenido verticalmente dentro de la card */
         }
-        .card:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .card:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.1); transform: translateY(-2px); }
         .card h2 { margin: 0 0 15px 0; color: #2980b9; font-size: 1.3rem; border-bottom: 1px dashed #ddd; padding-bottom: 5px; }
         
         /* Área de Texto */
         .text-content { 
             background: #fff; padding: 12px; border: 1px solid #eee; border-radius: 6px; 
-            white-space: pre-wrap; margin-bottom: 15px; min-height: 60px; outline: none;
+            white-space: pre-wrap; margin-bottom: 15px; 
+            flex-grow: 1; /* Hace que todas las cajas de texto midan lo mismo en la misma fila */
+            min-height: 120px; 
+            outline: none;
             line-height: 1.5; color: #444;
+            font-size: 0.95rem;
         }
         .editing { border: 2px solid #3498db; background: #f9f9f9; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
 
         /* Botones */
-        .actions { display: flex; gap: 10px; }
+        .actions { display: flex; gap: 10px; margin-top: auto; }
         button { 
             border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; 
-            font-weight: 600; font-size: 0.85rem; transition: 0.2s;
+            font-weight: 600; font-size: 0.85rem; transition: 0.2s; flex: 1;
         }
         .btn-copy { background-color: #3498db; color: white; }
         .btn-copy:hover { background-color: #2471a3; }
@@ -38,84 +54,85 @@
         .btn-edit:hover { background-color: #d5dbdb; }
         .save-mode { background-color: #27ae60 !important; color: white; }
         
-        /* Animación de aviso */
-        .toast { position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 10px 20px; border-radius: 5px; display: none; }
+        /* Toast notificación */
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 10px 20px; border-radius: 5px; display: none; z-index: 100; }
+
+        /* Ajuste para móviles */
+        @media (max-width: 500px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
     <h1>Plantillas de Evolución</h1>
 
-    <div class="card">
-        <h2>Faringitis</h2>
-        <div class="text-content" id="faringitis">Paciente que consulta por presenta fiebre de 24 hs de evolucion, con odinofagia y tos, al examen fisico se constata fauce congestiva, buena entrada de aire bilateral, se indica ibuprofeno y betametasona</div>
-        <div class="actions">
-            <button class="btn-copy" onclick="copyText('faringitis')">Copiar</button>
-            <button class="btn-edit" onclick="toggleEdit('faringitis', this)">Editar</button>
+    <div class="grid-container">
+
+        <div class="card">
+            <h2>Faringitis</h2>
+            <div class="text-content" id="faringitis">Paciente que consulta por presenta fiebre de 24 hs de evolucion, con odinofagia y tos, al examen fisico se constata fauce congestiva, buena entrada de aire bilateral, se indica ibuprofeno y betametasona</div>
+            <div class="actions">
+                <button class="btn-copy" onclick="copyText('faringitis')">Copiar</button>
+                <button class="btn-edit" onclick="toggleEdit('faringitis', this)">Editar</button>
+            </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>Escabiosis</h2>
-        <div class="text-content" id="escabiosis">Paciente que presenta lesion pruriginosa de varios dias de evolucion con mayor incidencia nocturna, no presenta otro sintomas asociado, se indica tratamiento con permetrina 5%</div>
-        <div class="actions">
-            <button class="btn-copy" onclick="copyText('escabiosis')">Copiar</button>
-            <button class="btn-edit" onclick="toggleEdit('escabiosis', this)">Editar</button>
+        <div class="card">
+            <h2>Escabiosis</h2>
+            <div class="text-content" id="escabiosis">Paciente que presenta lesion pruriginosa de varios dias de evolucion con mayor incidencia nocturna, no presenta otro sintomas asociado, se indica tratamiento con permetrina 5%</div>
+            <div class="actions">
+                <button class="btn-copy" onclick="copyText('escabiosis')">Copiar</button>
+                <button class="btn-edit" onclick="toggleEdit('escabiosis', this)">Editar</button>
+            </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>Control Niño Sano</h2>
-        <div class="text-content" id="id_nuevo">Pacientes que es traido por familiar por control de niño:
-        Peso y talla: Acorde a edad
-        Vacunas: completa para la edad
-        Desarrollo: Acorde a edad
-        Examen fisico: sin particularidad
-        Se indica:
+        <div class="card">
+            <h2>Control Niño Sano</h2>
+            <div class="text-content" id="id_nuevo">Pacientes que es traido por familiar por control de niño:
+Peso y talla: Acorde a edad
+Vacunas: completa para la edad
+Desarrollo: Acorde a edad
+Examen fisico: sin particularidad
+Se indica:</div>
+            <div class="actions">
+                <button class="btn-copy" onclick="copyText('id_nuevo')">Copiar</button>
+                <button class="btn-edit" onclick="toggleEdit('id_nuevo', this)">Editar</button>
+            </div>
         </div>
-        <div class="actions">
-            <button class="btn-copy" onclick="copyText('id_nuevo')">Copiar</button>
-            <button class="btn-edit" onclick="toggleEdit('id_nuevo', this)">Editar</button>
+
         </div>
-    </div>
 
-</div>
+    <div id="toast" class="toast">¡Texto copiado!</div>
 
-<div id="toast" class="toast">¡Texto copiado!</div>
-
-<script>
-    // Función para copiar texto
-    function copyText(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2000);
-        });
-    }
-
-    // Función para alternar entre Editar y Guardar
-    function toggleEdit(id, button) {
-        const div = document.getElementById(id);
-        const isEditing = div.contentEditable === "true";
-
-        if (!isEditing) {
-            // Activar modo edición
-            div.contentEditable = "true";
-            div.classList.add('editing');
-            div.focus();
-            button.innerText = "Guardar";
-            button.classList.add('save-mode');
-        } else {
-            // Desactivar modo edición
-            div.contentEditable = "false";
-            div.classList.remove('editing');
-            button.innerText = "Editar";
-            button.classList.remove('save-mode');
+    <script>
+        function copyText(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 2000);
+            });
         }
-    }
-</script>
+
+        function toggleEdit(id, button) {
+            const div = document.getElementById(id);
+            const isEditing = div.contentEditable === "true";
+
+            if (!isEditing) {
+                div.contentEditable = "true";
+                div.classList.add('editing');
+                div.focus();
+                button.innerText = "Guardar";
+                button.classList.add('save-mode');
+            } else {
+                div.contentEditable = "false";
+                div.classList.remove('editing');
+                button.innerText = "Editar";
+                button.classList.remove('save-mode');
+            }
+        }
+    </script>
 
 </body>
 </html>
