@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificación de Riesgo Obstétrico</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --danger-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --text-main: #333333;
+            --text-muted: #6c757d;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+        }
+
+        .form-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            margin: 0;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .section-title .options-header {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: normal;
+            align-items: center;
+        }
+
+        .question-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s;
+        }
+
+        .question-row:last-child {
+            border-bottom: none;
+        }
+
+        .question-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .question-text {
+            flex: 1;
+            padding-right: 20px;
+            font-size: 0.95rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            min-width: 80px;
+            justify-content: flex-end;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .radio-label input[type="radio"] {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .alert-box {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffeeba;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-weight: 500;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .alert-box strong {
+            color: var(--danger-color);
+        }
+
+        .input-specify {
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        @media (max-width: 600px) {
+            .question-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .radio-group {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: 5px;
+            }
+            .section-title .options-header {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="header-title">Formulario de clasificación de embarazadas de Bajo y Alto riesgo [cite: 1]</h1>
+
+    <div class="form-section">
+        <h2 class="section-title">
+            ANTECEDENTE OBSTETRICOS [cite: 2]
+            <div class="options-header"><span>NO</span><span>SI</span></div>
+        </h2>
+        
+        <div class="question-row">
+            <div class="question-text">Muerte fetal o muerte neonatal previa. [cite: 3]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs1" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs1" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Antecedentes de 3 o más abortos espontáneos consecutivos. [cite: 4]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs2" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs2" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Peso al nacer del último bebe < 2500g. [cite: 5]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs3" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs3" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Peso al nacer del último bebe >4500g. [cite: 6]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs4" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs4" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">¿Tuvo una internación por hipertensión o preeclampsia/eclampsia en último embarazo? [cite: 7]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs5" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs5" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Cirugía previa en tracto reproductivo (miomectomía, conizacion,resección de tabique,Cerclaje cervical) [cite: 8]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs6" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs6" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Colestasis en embarazo anterior [cite: 9]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs7" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs7" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Cesárea anterior(2 antes del embarazo actual) [cite: 10]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="obs8" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="obs8" value="si"> SI</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h2 class="section-title">
+            EMBARAZO ACTUAL [cite: 11]
+            <div class="options-header"><span>NO</span><span>SI</span></div>
+        </h2>
+        
+        <div class="question-row">
+            <div class="question-text">Diagnostico o sospecha de embarazo múltiple. [cite: 12]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act1" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act1" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Menos de 15 años de edad. [cite: 13]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act2" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act2" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Más de 40 años de edad. [cite: 14]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act3" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act3" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Isoinmunización Rh (-) en el embarazo actual o en embarazos anteriores. [cite: 15]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act4" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act4" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Hemorragia genital. [cite: 16]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act5" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act5" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Masa pélvica. [cite: 17]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act6" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act6" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Presión arterial diastólica de 90 mmHg o más durante el registro de datos. [cite: 18]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act7" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act7" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Posición Podálica [cite: 19]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="act8" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="act8" value="si"> SI</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h2 class="section-title">
+            HISTORIA CLINICA GENERAL [cite: 20]
+            <div class="options-header"><span>NO</span><span>SI</span></div>
+        </h2>
+        
+        <div class="question-row">
+            <div class="question-text">Diabetes – HTA - Nefropatía - Cardiopatía [cite: 21]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist1" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist1" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Anemia severa - Desnutrición [cite: 22]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist2" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist2" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Enfermedades del Colágeno (Lupus, etc.) [cite: 23]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist3" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist3" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Distocia Ósea (columna / cadera) [cite: 24]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist4" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist4" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Consumo de drogas (incluido el consumo excesivo de alcohol) [cite: 25]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist5" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist5" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Serologías positivas (HIV-Chagas-Toxoplasmosis-Hepatitis B) [cite: 26]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist6" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist6" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Patología respiratoria (Asma / EPOC / Neumonía) [cite: 27]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist7" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist7" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Patología cervical(incompetencia ístmico cervical – HPV u otra) [cite: 28]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist8" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist8" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row">
+            <div class="question-text">Patología Psiquiátrica - Epilepsia [cite: 29]</div>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="hist9" value="no"> NO</label>
+                <label class="radio-label"><input type="radio" name="hist9" value="si"> SI</label>
+            </div>
+        </div>
+
+        <div class="question-row" style="flex-direction: column; align-items: stretch;">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div class="question-text">Cualquier otra enfermedad o afección severa. Especificar: [cite: 30]</div>
+                <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="hist10" value="no"> NO</label>
+                    <label class="radio-label"><input type="radio" name="hist10" value="si"> SI</label>
+                </div>
+            </div>
+            <input type="text" class="input-specify" placeholder="Especifique la afección...">
+        </div>
+    </div>
+
+    <div class="alert-box">
+        ⚠ Una respuesta <strong>SI</strong> en cualquiera de las preguntas anteriores, significa que la mujer <strong>NO</strong> es elegible para un control prenatal de <strong>BAJO RIESGO</strong>, y debe ser <strong>DERIVADA</strong> al 2do nivel. [cite: 31]
+    </div>
+
+</div>
+
+</body>
+</html>
