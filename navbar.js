@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
                         MEDFAM
                     </span>
-                    <span class="text-xs text-slate-400 hidden sm:inline">| Consultorio Digital</span>
+                    <span class="text-xs text-slate-400 hidden sm:inline"></span>
                 </div>
                 
                 <div class="flex items-center space-x-1 md:space-x-4">
