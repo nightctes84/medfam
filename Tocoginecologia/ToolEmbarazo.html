@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Embarazo - Consultorio Médico</title>
+    <!-- Tailwind CSS para un diseño limpio y moderno -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Ajuste personalizado para el fondo */
+        body {
+            background-color: #f0f4f8;
+        }
+    </style>
+</head>
+<body class="text-gray-800 font-sans antialiased">
+
+    <!-- Encabezado de la Página -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 shadow-md mb-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl font-bold tracking-wide">Tool Embarazo</h1>
+            <p class="text-blue-100 text-sm mt-1">Herramientas Clínicas de Obstetricia y Control Gestacional</p>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <main class="container mx-auto px-4 pb-12 max-w-6xl">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- CARD 1: Gestación por FUM -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2 bg-pink-100 text-pink-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">Cálculo por FUM</h2>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Ingresá la Fecha de la Última Menstruación para calcular el tiempo gestacional y la FPP.</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de la FUM:</label>
+                        <input type="date" id="fum-date" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    
+                    <button onclick="calcularFUM()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 mb-4 cursor-pointer">Calcular</button>
+                </div>
+
+                <!-- Resultados FUM -->
+                <div id="resultado-fum" class="hidden bg-blue-50 p-4 rounded-xl border border-blue-100 space-y-2 text-sm text-blue-900">
+                    <div><span class="font-bold">Fecha Probable de Parto (FPP):</span> <span id="res-fpp" class="font-semibold text-indigo-700"></span></div>
+                    <div><span class="font-bold">Edad Gestacional Actual:</span> <span id="res-fum-semanas" class="font-semibold text-indigo-700"></span> semanas y <span id="res-fum-dias" class="font-semibold text-indigo-700"></span> días</div>
+                </div>
+            </div>
+
+            <!-- CARD 2: Gestación por Ecografía -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2 bg-purple-100 text-purple-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">Cálculo por Eco</h2>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Calculá la edad gestacional actual cargando los datos de una ecografía previa.</p>
+                    
+                    <div class="space-y-3 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Ecografía:</label>
+                            <input type="date" id="eco-date" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Semanas de la Eco:</label>
+                                <input type="number" id="eco-sem" min="0" max="42" placeholder="Ej: 12" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Días de la Eco:</label>
+                                <input type="number" id="eco-dias" min="0" max="6" placeholder="0-6" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="calcularEco()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 mb-4 cursor-pointer">Calcular</button>
+                </div>
+
+                <!-- Resultados Eco -->
+                <div id="resultado-eco" class="hidden bg-purple-50 p-4 rounded-xl border border-purple-100 space-y-2 text-sm text-purple-900">
+                    <div><span class="font-bold">Edad Gestacional Actual:</span> <span id="res-eco-semanas" class="font-semibold text-purple-700"></span> semanas y <span id="res-eco-dias" class="font-semibold text-purple-700"></span> días</div>
+                </div>
+            </div>
+
+            <!-- CARD 3: Altura Uterina -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">Altura Uterina</h2>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Ingresá la medida en centímetros de la AU para estimar el rango de percentilos normales (p10 a p90).</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Altura Uterina (cm):</label>
+                        <input type="number" id="au-cm" min="10" max="45" placeholder="Ej: 24" class="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+                    
+                    <button onclick="calcularAU()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 mb-4 cursor-pointer">Evaluar Rango</button>
+                </div>
+
+                <!-- Resultados AU -->
+                <div id="resultado-au" class="hidden bg-emerald-50 p-4 rounded-xl border border-emerald-100 space-y-2 text-sm text-emerald-900">
+                    <div><span class="font-bold">Semanas estimadas recomendadas:</span></div>
+                    <div id="res-au-rango" class="font-semibold text-emerald-800 bg-white p-2 rounded border border-emerald-200 text-center text-base"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Formateador de fechas clínico local
+        function formatearFecha(fecha) {
+            const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+            return fecha.toLocaleDateString('es-AR', opciones);
+        }
+
+        // 1. Cálculo por FUM
+        function calcularFUM() {
+            const fumInput = document.getElementById('fum-date').value;
+            if (!fumInput) return alert('Por favor, ingresá una fecha de FUM válida.');
+
+            const fum = new Date(fumInput + 'T00:00:00');
+            const hoy = new Date();
+            hoy.setHours(0,0,0,0);
+
+            // FPP (Regla de Naegele estandarizada: FUM + 280 días)
+            const fpp = new Date(fum.getTime());
+            fpp.setDate(fpp.getDate() + 280);
+
+            // Edad Gestacional
+            const diferenciaTiempo = hoy - fum;
+            const totalDias = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
+            
+            if(totalDias < 0) return alert('La FUM no puede ser posterior a la fecha de hoy.');
+
+            const semanas = Math.floor(totalDias / 7);
+            const dias = totalDias % 7;
+
+            // Renderizar
+            document.getElementById('res-fpp').innerText = formatearFecha(fpp);
+            document.getElementById('res-fum-semanas').innerText = semanas;
+            document.getElementById('res-fum-dias').innerText = dias;
+            document.getElementById('resultado-fum').classList.remove('hidden');
+        }
+
+        // 2. Cálculo por Ecografía Anterior
+        function calcularEco() {
+            const ecoInput = document.getElementById('eco-date').value;
+            const ecoSem = parseInt(document.getElementById('eco-sem').value) || 0;
+            const ecoDias = parseInt(document.getElementById('eco-dias').value) || 0;
+
+            if (!ecoInput) return alert('Por favor, ingresá la fecha de realización de la ecografía.');
+
+            const fechaEco = new Date(ecoInput + 'T00:00:00');
+            const hoy = new Date();
+            hoy.setHours(0,0,0,0);
+
+            const diferenciaTiempo = hoy - fechaEco;
+            const diasTranscurridos = Math.floor(diferenciaTiempo / (1000 * 60 * 60 * 24));
+
+            if(diasTranscurridos < 0) return alert('La fecha de la ecografía no puede ser posterior al día de hoy.');
+
+            // Días totales que tenía en la eco + días que pasaron hasta hoy
+            const diasTotalesAlDiaDeHoy = (ecoSem * 7) + ecoDias + diasTranscurridos;
+
+            const semanasActuales = Math.floor(diasTotalesAlDiaDeHoy / 7);
+            const diasActuales = diasTotalesAlDiaDeHoy % 7;
+
+            // Renderizar
+            document.getElementById('res-eco-semanas').innerText = semanasActuales;
+            document.getElementById('res-eco-dias').innerText = diasActuales;
+            document.getElementById('resultado-eco').classList.remove('hidden');
+        }
+
+        // 3. Altura Uterina (Tabla estandarizada basada en curvas CLAP/OMS Percentilos 10 y 90 aproximados)
+        function calcularAU() {
+            const au = parseInt(document.getElementById('au-cm').value);
+            if (!au || au < 0) return alert('Por favor, ingresá una medida válida en centímetros.');
+
+            let rangoSemana = "";
+
+            // Lógica de mapeo de rangos clínicos frecuentes (AU en cm -> Edad Gestacional aproximada)
+            if (au < 13) rangoSemana = "Menos de 13 semanas (Útero intrapélvico o apenas palpable)";
+            else if (au === 13 || au === 14) rangoSemana = "13 - 15 semanas";
+            else if (au === 15 || au === 16) rangoSemana = "16 - 17 semanas";
+            else if (au >= 17 && au <= 19)   rangoSemana = "18 - 20 semanas";
+            else if (au >= 20 && au <= 22)   rangoSemana = "21 - 23 semanas";
+            else if (au >= 23 && au <= 25)   rangoSemana = "24 - 26 semanas";
+            else if (au >= 26 && au <= 28)   rangoSemana = "27 - 29 semanas";
+            else if (au >= 29 && au <= 31)   rangoSemana = "30 - 32 semanas";
+            else if (au >= 32 && au <= 34)   rangoSemana = "33 - 35 semanas";
+            else if (au >= 35 && au <= 37)   rangoSemana = "36 - 38 semanas";
+            else if (au >= 38)               rangoSemana = "39 - 41 semanas (Término)";
+
+            // Renderizar
+            document.getElementById('res-au-rango').innerText = rangoSemana;
+            document.getElementById('resultado-au').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
