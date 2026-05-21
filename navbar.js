@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Construimos el HTML de la barra de navegación
     let navbarHTML = `
     <nav class="bg-slate-900 text-white shadow-lg sticky top-4 z-50 
-            w-[92%] max-w-6xl mx-auto rounded-2xl">
+            w-[100%] max-w-6xl mx-auto rounded-2xl">
         div class="px-6">
             <div class="flex justify-between h-16">
                 <div class="flex items-center space-x-2">
