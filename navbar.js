@@ -22,20 +22,21 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     // Construimos el HTML de la barra de navegación
-    let navbarHTML = `
-    <nav class="bg-slate-900 text-white shadow-lg sticky top-4 z-50 
-            w-[100%] max-w-6xl mx-auto rounded-2xl">
-        div class="px-6">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center space-x-2">
-                    <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
-                        MEDFAM
-                    </span>
-                    <span class="text-xs text-slate-400 hidden sm:inline"></span>
-                </div>
-                
-                <div class="flex items-center space-x-1 md:space-x-4">
-    `;
+  let navbarHTML = `
+<nav class="bg-slate-900 text-white shadow-lg sticky top-4 z-50 
+            w-[92%] max-w-6xl mx-auto rounded-2xl">
+    
+    <div class="px-6">
+        <div class="flex justify-between h-16">
+            
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
+                    MEDFAM
+                </span>
+            </div>
+
+            <div class="flex items-center space-x-1 md:space-x-4">
+`;
 
     // Iteramos los links y marcamos como 'activo' el que coincida con la URL actual
     links.forEach(link => {
