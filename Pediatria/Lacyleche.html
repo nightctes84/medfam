@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramienta de Cálculo: Lactancia y Fórmulas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #fff;
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #eef2f3;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        input[type="number"], select, input[type="range"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .range-value {
+            font-weight: bold;
+            color: #3498db;
+            min-width: 50px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .results {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #2ecc71;
+            border-radius: 4px;
+            display: none;
+        }
+        .alert-danger {
+            background-color: #fce4e4;
+            border-left: 5px solid #e74c3c;
+            color: #c0392b;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+            font-weight: 500;
+        }
+        .alert-mixta {
+            background-color: #e8f4f8;
+            border-left: 5px solid #3498db;
+            color: #2980b9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .result-item {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .result-item strong {
+            color: #2c3e50;
+        }
+        .nota-clinica {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        #porcentaje-group {
+            display: none;
+            background-color: #f9fbfd;
+            padding: 15px;
+            border: 1px dashed #bdc3c7;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Cálculo de Preparación de Mamaderas</h2>
+    
+    <div class="form-group">
+        <label for="modalidad">Modalidad de Alimentación:</label>
+        <select id="modalidad" onchange="toggleModalidad()">
+            <option value="exclusiva">Lactancia Artificial Exclusiva</option>
+            <option value="mixta">Lactancia Mixta (Complemento por bajo peso)</option>
+        </select>
+    </div>
+
+    <div class="form-group" id="porcentaje-group">
+        <label for="porcentaje">Porcentaje a cubrir con Fórmula (%):</label>
+        <p style="font-size: 13px; color: #555; margin-top: 0;">Ajuste el porcentaje del requerimiento diario que desea complementar luego del pecho.</p>
+        <div class="range-container">
+            <input type="range" id="porcentaje" min="10" max="90" step="10" value="50" oninput="updateRangeValue(this.value)">
+            <span class="range-value"><span id="rango-val">50</span>%</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="edad">Edad del niño (en meses):</label>
+        <input type="number" id="edad" min="0" placeholder="Ej. 3" required>
+    </div>
+
+    <div class="form-group">
+        <label for="peso">Peso del niño (en kg):</label>
+        <input type="number" id="peso" step="0.1" min="1" placeholder="Ej. 5.5" required>
+    </div>
+
+    <div class="form-group">
+        <label for="condicion">Condición de Nacimiento:</label>
+        <select id="condicion">
+            <option value="normal">Peso Normal / Término (Requiere ~150 ml/kg/día)</option>
+            <option value="bajo_peso">Bajo Peso / Prematuro (Requiere ~160 ml/kg/día para catch-up)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="tomas">Cantidad de tomas al día (Pecho + Mamadera):</label>
+        <input type="number" id="tomas" min="1" max="12" placeholder="Ej. 6" required>
+    </div>
+
+    <div class="form-group">
+        <label for="leche">Tipo de leche para el complemento:</label>
+        <select id="leche">
+            <option value="formula">Fórmula Infantil de Inicio / Continuación</option>
+            <option value="entera">Leche Entera de Vaca</option>
+        </select>
+    </div>
+
+    <button onclick="calcularLactancia()">Calcular Recomendación</button>
+
+    <div id="alert-clinica" class="alert-danger"></div>
+
+    <div id="resultados" class="results">
+        <div id="mensaje-mixta" class="alert-mixta" style="display: none;">
+            <strong>Indicación Clínica:</strong> Ofrecer siempre el pecho materno primero a libre demanda y luego ofrecer el complemento preparado según la indicación inferior.
+        </div>
+        <div class="result-item"><strong>Constante utilizada:</strong> <span id="constante-usada"></span> ml/kg/día</div>
+        <div class="result-item"><strong>Volumen diario total estimado:</strong> <span id="vol-diario-total"></span> ml/día</div>
+        <div class="result-item" id="item-vol-complemento" style="display: none;"><strong>Volumen diario a suplementar (<span id="porc-usado"></span>%):</strong> <span id="vol-diario-complemento"></span> ml/día</div>
+        <div class="result-item"><strong>Volumen neto teórico por toma:</strong> <span id="vol-toma"></span> ml por mamadera</div>
+        <hr style="border: 0; border-top: 1px solid #eef2f3; margin: 15px 0;">
+        <div class="result-item" id="instruccion-preparacion" style="font-size: 16px; color: #16a085; font-weight: bold;"></div>
+        <div class="nota-clinica" id="nota-prematuro" style="display: none;">
+            *Nota: En prematuros o lactantes de bajo peso, el requerimiento puede extenderse hasta 180 ml/kg/día. Se utiliza 160 ml/kg/día como parámetro inicial.
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleModalidad() {
+    const modalidad = document.getElementById('modalidad').value;
+    const porcentajeGroup = document.getElementById('porcentaje-group');
+    if (modalidad === 'mixta') {
+        porcentajeGroup.style.display = 'block';
+    } else {
+        porcentajeGroup.style.display = 'none';
+    }
+}
+
+function updateRangeValue(val) {
+    document.getElementById('rango-val').innerText = val;
+}
+
+function calcularLactancia() {
+    const modalidad = document.getElementById('modalidad').value;
+    const porcentaje = parseInt(document.getElementById('porcentaje').value);
+    const edad = parseInt(document.getElementById('edad').value);
+    const peso = parseFloat(document.getElementById('peso').value);
+    const condicion = document.getElementById('condicion').value;
+    const tomas = parseInt(document.getElementById('tomas').value);
+    const leche = document.getElementById('leche').value;
+
+    const divResultados = document.getElementById('resultados');
+    const divAlerta = document.getElementById('alert-clinica');
+    const notaPrematuro = document.getElementById('nota-prematuro');
+    const mensajeMixta = document.getElementById('mensaje-mixta');
+    const itemVolComplemento = document.getElementById('item-vol-complemento');
+
+    // Resetear vistas
+    divResultados.style.display = 'none';
+    divAlerta.style.display = 'none';
+    notaPrematuro.style.display = 'none';
+    mensajeMixta.style.display = 'none';
+    itemVolComplemento.style.display = 'none';
+
+    if (isNaN(edad) || isNaN(peso) || isNaN(tomas) || peso <= 0 || tomas <= 0) {
+        alert('Por favor, complete todos los campos numéricos con valores válidos.');
+        return;
+    }
+
+    // Validación crítica según consensos de la SAP
+    if (leche === 'entera' && edad < 12) {
+        divAlerta.innerHTML = '<strong>Advertencia Clínica Absoluta:</strong> La Sociedad Argentina de Pediatría desaconseja el uso de leche entera de vaca en menores de 12 meses (riesgo de sangrado intestinal, anemia ferropénica y daño renal).';
+        divAlerta.style.display = 'block';
+        return;
+    }
+
+    // Selección de la constante hidro-calórica
+    const constante = (condicion === 'bajo_peso') ? 160 : 150;
+    
+    // Cálculo de volúmenes totales
+    const volumenDiarioTotal = Math.round(peso * constante);
+    let volumenAAdministrar = volumenDiarioTotal;
+
+    // Ajuste si es modalidad mixta
+    if (modalidad === 'mixta') {
+        volumenAAdministrar = Math.round(volumenDiarioTotal * (porcentaje / 100));
+        mensajeMixta.style.display = 'block';
+        itemVolComplemento.style.display = 'block';
+        document.getElementById('porc-usado').innerText = porcentaje;
+        document.getElementById('vol-diario-complemento').innerText = volumenAAdministrar;
+    }
+
+    const volumenPorTomaTeorico = Math.round(volumenAAdministrar / tomas);
+
+    document.getElementById('constante-usada').innerText = constante;
+    document.getElementById('vol-diario-total').innerText = volumenDiarioTotal;
+    document.getElementById('vol-toma').innerText = volumenPorTomaTeorico;
+
+    let instruccion = '';
+
+    if (leche === 'formula') {
+        // Redondeo al múltiplo de 30 ml superior para fórmulas
+        // Si el teórico es muy bajo (ej. 15ml), siempre sugerir al menos 1 medida (30ml)
+        let medidasNecesarias = Math.ceil(volumenPorTomaTeorico / 30);
+        if (medidasNecesarias === 0) medidasNecesarias = 1; 
+        
+        const volumenAguaReal = medidasNecesarias * 30;
+
+        instruccion = `Preparación del Complemento: Colocar ${volumenAguaReal} ml de agua segura + ${medidasNecesarias} medida(s) al ras de polvo. (Desechar el remanente si no la termina).`;
+    } else {
+        instruccion = `Preparación Recomendada: Administrar ${volumenPorTomaTeorico} ml de leche entera líquida templada, o reconstituir al 10% si es en polvo.`;
+    }
+
+    document.getElementById('instruccion-preparacion').innerText = instruccion;
+    
+    if (condicion === 'bajo_peso') {
+        notaPrematuro.style.display = 'block';
+    }
+
+    divResultados.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
