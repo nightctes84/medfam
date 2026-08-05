@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enfoque Clínico - Perímetro Cefálico y Desarrollo</title>
+    <style>
+        :root {
+            --primary: #0369a1;
+            --secondary: #e0f2fe;
+            --warning: #fef08a;
+            --danger: #fee2e2;
+            --danger-border: #ef4444;
+            --text: #334155;
+            --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        h2 { color: var(--primary); margin-top: 0; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); padding: 20px; margin-bottom: 20px; }
+        .alert-danger { background-color: var(--danger); border-left: 4px solid var(--danger-border); padding: 15px; margin: 15px 0; border-radius: 0 4px 4px 0; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .table th, .table td { border: 1px solid #e2e8f0; padding: 12px; text-align: left; }
+        .table th { background-color: var(--secondary); color: var(--primary); }
+        .source { font-size: 0.85em; color: #64748b; font-style: italic; text-align: right; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Evaluación de Perímetro Cefálico (> Pc 90/97) y Desarrollo</h1>
+        
+        <div class="card">
+            <h2>1. Pasos en el Consultorio</h2>
+            <ul>
+                <li><strong>Confirmar Medición:</strong> Cinta inextensible, pasando por glabela y prominencia occipital máxima.</li>
+                <li><strong>Evaluar Velocidad:</strong> Analizar curva. El cruce de percentilos hacia arriba es alarma; el crecimiento paralelo al Pc 90-95 sugiere patrón constitucional.</li>
+                <li><strong>Examen Físico:</strong> Palpar fontanelas y suturas. Buscar signos de hipertensión endocraneana (vómitos, alteraciones del tono, signo del sol naciente).</li>
+                <li><strong>Antecedentes Familiares:</strong> Medir PC de ambos padres para descartar Macrocefalia Familiar Benigna.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>2. Cierre de Fontanelas</h2>
+            <table class="table">
+                <tr>
+                    <th>Fontanela</th>
+                    <th>Período Normal de Cierre</th>
+                    <th>Clínica / Alarma</th>
+                </tr>
+                <tr>
+                    <td><strong>Posterior (Lambdoidea)</strong></td>
+                    <td>1 a 3 meses</td>
+                    <td>Suele ser puntiforme al nacimiento.</td>
+                </tr>
+                <tr>
+                    <td><strong>Anterior (Bregmática)</strong></td>
+                    <td>9 a 18 meses (promedio 13-14m)</td>
+                    <td>
+                        <strong>Cierre Tardío:</strong> Descartar hidrocefalia (si PC > 97), Hipotiroidismo, Raquitismo.<br>
+                        <strong>Cierre Prematuro (< 4m):</strong> Riesgo de craneosinostosis si el PC cae de percentilo o hay asimetría.
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>3. Conducta y Derivación</h2>
+            <p><strong>Paciente asintomático:</strong> Desarrollo normal, sin signos de HTE, antecedentes familiares (+) &rarr; <em>Control estricto</em>.</p>
+            <p><strong>Paciente con dudas (fontanela abierta):</strong> &rarr; <em>Ecografía transfontanelar</em>.</p>
+            <div class="alert-danger">
+                <strong>Derivación a Neuropediatría / Neurocirugía:</strong> 
+                Presencia de retraso madurativo, síntomas neurológicos, HTE, abombamiento de fontanela en reposo, o cierre prematuro con asimetría craneal.
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>4. Pautas Madurativas (Signos de Alarma / IODI)</h2>
+            <p><em>Evaluar hitos límite. En pacientes prematuros, recordar utilizar la <strong>Edad Corregida</strong> hasta los 2 años. Si NO alcanza el hito a esta edad límite, derivar.</em></p>
+            <table class="table">
+                <tr><th>Edad Límite</th><th>Hito Ausente (Signo de Alarma)</th></tr>
+                <tr><td><strong>3 - 4 meses</strong></td><td>No logra sostén cefálico / No sonrisa social.</td></tr>
+                <tr><td><strong>6 meses</strong></td><td>No rola / No agarra objetos voluntariamente.</td></tr>
+                <tr><td><strong>9 meses</strong></td><td>No se sienta sin apoyo (sedestación) / No balbucea.</td></tr>
+                <tr><td><strong>12 meses</strong></td><td>No realiza pinza fina / No señala con el dedo.</td></tr>
+                <tr><td><strong>15 - 18 meses</strong></td><td>No camina de forma independiente / No dice 3 palabras.</td></tr>
+                <tr><td><strong>24 meses</strong></td><td>No arma frases de 2 palabras / Ausencia de juego simbólico.</td></tr>
+            </table>
+        </div>
+
+        <div class="source">
+            Fuentes: Guías de Evaluación del Crecimiento (SAP, 2024); Estándares de Crecimiento Infantil (OMS); IODI / PRUNAPE (SAP).
+        </div>
+    </div>
+</body>
+</html>

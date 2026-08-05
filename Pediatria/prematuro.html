@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento - Prematuro y Bajo Peso</title>
+    <style>
+        :root {
+            --primary: #0f766e;
+            --secondary: #ccfbf1;
+            --warning: #fef08a;
+            --danger: #fee2e2;
+            --text: #334155;
+            --bg: #f8fafc;
+        }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        h2 { color: var(--primary); margin-top: 0; }
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .table th, .table td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; font-size: 0.95em; }
+        .table th { background-color: var(--secondary); color: var(--primary); }
+        .calc-box { background: var(--secondary); padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid #99f6e4; }
+        .calc-input { padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1; width: 100px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #115e59; }
+        .result { font-weight: bold; color: #0f766e; font-size: 1.1em; margin-top: 10px; }
+        .source { font-size: 0.85em; color: #64748b; font-style: italic; text-align: right; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Seguimiento: Prematuro y Bajo Peso (< 2500g)</h1>
+        
+        <div class="card">
+            <h2>1. Pilares del Enfoque Clínico</h2>
+            <ul>
+                <li><strong>Edad Corregida (EC):</strong> Utilizar EC hasta los <strong>2 años</strong> para antropometría y pautas madurativas.</li>
+                <li><strong>Vacunación:</strong> Siempre según <strong>edad cronológica</strong> (Ojo: VSR y antigripal desde los 6 meses).</li>
+                <li><strong>Vitamina D:</strong> 400 UI/día hasta el año de vida.</li>
+                <li><strong>Pesquisas Clave:</strong> Verificar ROP (Fondo de ojo), Hipoacusia (OEA) y Eco cerebral al alta.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>2. Pautas Madurativas (Signos de Alarma / IODI)</h2>
+            <p><em>Evaluar según Edad Corregida. Si NO alcanza el hito a esta edad límite, derivar.</em></p>
+            <table class="table">
+                <tr><th>Edad Límite</th><th>Hito Ausente (Signo de Alarma)</th></tr>
+                <tr><td><strong>3 - 4 meses</strong></td><td>No logra sostén cefálico / No sonrisa social.</td></tr>
+                <tr><td><strong>6 meses</strong></td><td>No rola / No agarra objetos voluntariamente.</td></tr>
+                <tr><td><strong>9 meses</strong></td><td>No se sienta sin apoyo (sedestación) / No balbucea.</td></tr>
+                <tr><td><strong>12 meses</strong></td><td>No realiza pinza fina / No señala con el dedo.</td></tr>
+                <tr><td><strong>15 - 18 meses</strong></td><td>No camina de forma independiente / No dice 3 palabras.</td></tr>
+                <tr><td><strong>24 meses</strong></td><td>No arma frases de 2 palabras / Ausencia de juego simbólico.</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>3. Medicación: Hierro (Programa REMEDIAR)</h2>
+            <p><strong>Sulfato Ferroso 12,5%:</strong> 1 gota = 1,25 mg Fe elemental. | <strong>Comprimido 200mg:</strong> 40 mg Fe elemental.</p>
+            
+            <div class="calc-box">
+                <h3>Calculadora de Dosis de Hierro</h3>
+                <label>Peso del paciente (kg): </label>
+                <input type="number" id="pesoInput" class="calc-input" step="0.1" placeholder="Ej. 6.5">
+                <button class="btn" onclick="calcularHierro()">Calcular</button>
+                
+                <div id="resultadoCalc" class="result"></div>
+            </div>
+        </div>
+
+        <div class="source">
+            Fuentes: Guía Nacional para el Seguimiento del RN de Alto Riesgo (MSAL); Programa de Seguimiento (Maternidad Sardá); IODI / PRUNAPE (SAP).
+        </div>
+    </div>
+
+    <script>
+        function calcularHierro() {
+            const peso = parseFloat(document.getElementById('pesoInput').value);
+            if (!peso || peso <= 0) {
+                document.getElementById('resultadoCalc').innerHTML = "Por favor, ingrese un peso válido.";
+                return;
+            }
+
+            // Cálculos
+            const gotasProfTermino = Math.round(peso * 1);
+            const gotasProfPrematuro = Math.round(peso * 2);
+            const gotasTratMin = Math.round(peso * 3);
+            const gotasTratMax = Math.round(peso * 5);
+            
+            // Tratamiento en pastillas (para mayores de 6-8 años o > 20kg aprox)
+            const mgTratamiento = peso * 4; // Promedio 4mg/kg
+            const pastillas200 = (mgTratamiento / 40).toFixed(1);
+
+            let html = `<hr>
+                <strong>Profilaxis:</strong><br>
+                - RN Término (1 gota/kg): <strong>${gotasProfTermino} gotas/día</strong><br>
+                - Prematuro/Bajo Peso (2 gotas/kg): <strong>${gotasProfPrematuro} gotas/día</strong> (Máx. ~12 gotas sin reevaluar).<br><br>
+                
+                <strong>Tratamiento Anemia (3 a 5 gotas/kg):</strong><br>
+                - Gotas: <strong>De ${gotasTratMin} a ${gotasTratMax} gotas/día</strong> (Fraccionar en 1 o 2 tomas, lejos de lácteos).<br>`;
+                
+            if(peso >= 20) {
+                html += `- Comprimidos (200mg): <strong>${pastillas200} pastillas/día</strong> (Calculado a 4mg/kg/día).`;
+            }
+
+            document.getElementById('resultadoCalc').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
