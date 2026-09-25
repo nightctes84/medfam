@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Gestión - Protocolo T-15</title>
+    <!-- Supabase y Tailwind -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex h-screen overflow-hidden">
+
+    <!-- Menú Lateral -->
+    <aside class="w-64 bg-gray-800 text-white flex flex-col">
+        <div class="h-16 flex items-center justify-center border-b border-gray-700 font-bold text-lg">
+            CAPS XV - T-15
+        </div>
+        <nav class="flex-1 px-4 py-4 space-y-2">
+            <button onclick="mostrarSeccion('alertas')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">🔔 Alertas Pendientes</button>
+            <button onclick="mostrarSeccion('nuevo')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">➕ Ingresar Paciente / Contacto</button>
+            <button onclick="mostrarSeccion('listado')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">📋 Listado y Seguimiento</button>
+        </nav>
+        <div class="p-4 border-t border-gray-700">
+            <button onclick="cerrarSesion()" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded">Cerrar Sesión</button>
+        </div>
+    </aside>
+
+    <!-- Área Principal -->
+    <main class="flex-1 p-8 overflow-y-auto">
+        
+        <!-- Módulo: Alertas -->
+        <section id="sec-alertas" class="seccion-app">
+            <h1 class="text-2xl font-bold mb-4 border-b pb-2">Alertas de Adherencia Semanal</h1>
+            <p class="text-gray-600 mb-4">Pacientes que deben concurrir hoy para la aplicación de dosis.</p>
+            <div class="bg-white p-4 rounded shadow">
+                <!-- Aquí JavaScript inyectará la tabla de alertas -->
+                <p class="text-sm text-gray-500">Cargando datos...</p>
+            </div>
+        </section>
+
+        <!-- Módulo: Nuevo Registro -->
+        <section id="sec-nuevo" class="seccion-app hidden">
+            <h1 class="text-2xl font-bold mb-4 border-b pb-2">Registrar Caso Índice o Contacto</h1>
+            <div class="bg-white p-6 rounded shadow max-w-lg">
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium">Nombre Completo</label>
+                        <input type="text" class="mt-1 w-full border rounded p-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Teléfono (Para citación)</label>
+                        <input type="text" class="mt-1 w-full border rounded p-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Tipo de Caso</label>
+                        <select class="mt-1 w-full border rounded p-2">
+                            <option>Caso Índice</option>
+                            <option>Contacto Sexual</option>
+                        </select>
+                    </div>
+                    <button type="button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Guardar Registro</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Módulo: Listado -->
+        <section id="sec-listado" class="seccion-app hidden">
+            <h1 class="text-2xl font-bold mb-4 border-b pb-2">Pacientes en Seguimiento</h1>
+            <div class="bg-white p-4 rounded shadow">
+                <p class="text-sm text-gray-500">Aquí se integrará el historial clínico digital simplificado.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // REEMPLAZA ESTOS VALORES (Los mismos que en ingreso.html)
+        const supabaseUrl = 'https://cxnajcsedyrgjrxywfio.supabase.co'; 
+        const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; 
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 1. Verificar si hay un usuario logueado al cargar la página
+        async function verificarSesion() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // Si no hay sesión válida, lo expulsa al login
+                window.location.href = 'ingreso.html';
+            }
+        }
+        verificarSesion(); // Ejecutar validación inmediatamente
+
+        // 2. Función para navegar entre secciones simulando páginas distintas
+        function mostrarSeccion(id) {
+            // Oculta todas las secciones
+            const secciones = document.querySelectorAll('.seccion-app');
+            secciones.forEach(sec => sec.classList.add('hidden'));
+            
+            // Muestra solo la sección solicitada
+            document.getElementById('sec-' + id).classList.remove('hidden');
+        }
+
+        // 3. Función para salir de forma segura
+        async function cerrarSesion() {
+            const { error } = await supabase.auth.signOut();
+            window.location.href = 'ingreso.html';
+        }
+    </script>
+</body>
+</html>
