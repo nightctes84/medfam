@@ -17,7 +17,7 @@
         <nav class="flex-1 px-4 py-4 space-y-2">
             <button onclick="mostrarSeccion('alertas')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">🔔 Alertas Pendientes</button>
             <button onclick="mostrarSeccion('nuevo')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">➕ Ingresar Paciente</button>
-            <button onclick="mostrarSeccion('tratamiento')" class="w-full text-left px-4 py-2 rounded hover:bg-blue-600 bg-gray-700">💉 Asignar Tratamiento</button>
+            <button onclick="mostrarSeccion('tratamiento')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">💉 Asignar Tratamiento</button>
             <button onclick="mostrarSeccion('listado')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">📋 Listado y Seguimiento</button>
         </nav>
         <div class="p-4 border-t border-gray-700">
@@ -30,10 +30,23 @@
         
         <!-- Módulo: Alertas -->
         <section id="sec-alertas" class="seccion-app">
-            <h1 class="text-2xl font-bold mb-4 border-b pb-2">Alertas de Adherencia Semanal</h1>
-            <p class="text-gray-600 mb-4">Pacientes que deben concurrir hoy para la aplicación de dosis.</p>
-            <div class="bg-white p-4 rounded shadow" id="contenedor-alertas">
-                <p class="text-sm text-gray-500">No hay alertas pendientes por el momento.</p>
+            <h1 class="text-2xl font-bold mb-4 border-b pb-2 text-red-600">🚨 Alertas de Adherencia</h1>
+            <p class="text-gray-600 mb-4">Pacientes con dosis programadas para hoy o atrasadas.</p>
+            <div class="bg-white p-4 rounded shadow overflow-x-auto">
+                <table class="min-w-full text-left text-sm">
+                    <thead class="bg-gray-100 border-b">
+                        <tr>
+                            <th class="p-3">Paciente</th>
+                            <th class="p-3">Teléfono</th>
+                            <th class="p-3 text-center">Dosis N°</th>
+                            <th class="p-3 text-center">Fecha Programada</th>
+                            <th class="p-3 text-center">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-alertas">
+                        <tr><td colspan="5" class="p-4 text-center text-gray-500">Buscando alertas...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -95,15 +108,28 @@
                     </div>
                     <button type="button" onclick="guardarTratamiento()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Programar Esquema</button>
                 </form>
-                <p id="mensaje-exito-trat" class="text-green-600 font-bold mt-4 hidden">¡Tratamiento y alertas programadas con éxito!</p>
+                <p id="mensaje-exito-trat" class="text-green-600 font-bold mt-4 hidden">¡Tratamiento programado con éxito!</p>
             </div>
         </section>
 
         <!-- Módulo: Listado -->
         <section id="sec-listado" class="seccion-app hidden">
             <h1 class="text-2xl font-bold mb-4 border-b pb-2">Pacientes en Seguimiento</h1>
-            <div class="bg-white p-4 rounded shadow">
-                <p class="text-sm text-gray-500">Aquí aparecerá la lista de pacientes.</p>
+            <div class="bg-white p-4 rounded shadow overflow-x-auto">
+                <table class="min-w-full text-left text-sm">
+                    <thead class="bg-gray-100 border-b">
+                        <tr>
+                            <th class="p-3">DNI</th>
+                            <th class="p-3">Nombre</th>
+                            <th class="p-3">Teléfono</th>
+                            <th class="p-3">Domicilio</th>
+                            <th class="p-3">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-listado">
+                        <tr><td colspan="5" class="p-4 text-center text-gray-500">Buscando registros...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
@@ -116,6 +142,7 @@
         async function verificarSesion() {
             const { data: { session } } = await clienteSupabase.auth.getSession();
             if (!session) window.location.href = 'ingreso.html';
+            else cargarAlertas(); // Carga las alertas al iniciar por primera vez
         }
         verificarSesion();
 
@@ -124,10 +151,10 @@
             secciones.forEach(sec => sec.classList.add('hidden'));
             document.getElementById('sec-' + id).classList.remove('hidden');
             
-            // Si entra a tratamiento, carga los pacientes de la base de datos
-            if (id === 'tratamiento') {
-                cargarPacientesParaSelect();
-            }
+            // Disparadores de datos según la sección
+            if (id === 'tratamiento') cargarPacientesParaSelect();
+            if (id === 'listado') cargarListado();
+            if (id === 'alertas') cargarAlertas();
         }
 
         async function cerrarSesion() {
@@ -135,7 +162,7 @@
             window.location.href = 'ingreso.html';
         }
 
-        // --- FUNCIONES DE PACIENTES ---
+        // --- 1. MÓDULO NUEVO PACIENTE ---
         async function guardarPaciente() {
             const dni = document.getElementById('dni_paciente').value;
             const nombre = document.getElementById('nombre_paciente').value;
@@ -157,21 +184,13 @@
             }
         }
 
-        // --- FUNCIONES DE TRATAMIENTO Y DOSIS ---
+        // --- 2. MÓDULO ASIGNAR TRATAMIENTO ---
         async function cargarPacientesParaSelect() {
             const select = document.getElementById('select_paciente');
-            select.innerHTML = '<option value="">Cargando...</option>';
+            const { data, error } = await clienteSupabase.from('pacientes').select('id_paciente, nombre_completo, dni').order('nombre_completo', { ascending: true });
             
-            const { data, error } = await clienteSupabase
-                .from('pacientes')
-                .select('id_paciente, nombre_completo, dni')
-                .order('nombre_completo', { ascending: true });
-
-            if (error || !data) {
-                select.innerHTML = '<option value="">Error al cargar</option>';
-                return;
-            }
-
+            if (error || !data) return select.innerHTML = '<option value="">Error al cargar</option>';
+            
             select.innerHTML = '<option value="">-- Seleccione un paciente --</option>';
             data.forEach(paciente => {
                 let opcion = document.createElement('option');
@@ -186,11 +205,8 @@
             const fechaActivacion = document.getElementById('fecha_activacion').value;
             const cantDosis = parseInt(document.getElementById('cant_dosis').value);
 
-            if (!idPaciente || !fechaActivacion) {
-                return alert("Selecciona un paciente y la fecha de activación.");
-            }
+            if (!idPaciente || !fechaActivacion) return alert("Selecciona un paciente y la fecha de activación.");
 
-            // 1. Guardar el esquema principal
             const { data: esquemaData, error: esquemaError } = await clienteSupabase
                 .from('esquemas_tratamiento')
                 .insert([{ id_paciente: idPaciente, fecha_activacion: fechaActivacion }])
@@ -199,15 +215,12 @@
             if (esquemaError) return alert("Error al crear esquema: " + esquemaError.message);
 
             const idEsquema = esquemaData[0].id_esquema;
-
-            // 2. Calcular fechas y crear las dosis (separadas por 7 días)
             let dosisArray = [];
-            let fechaBase = new Date(fechaActivacion + 'T00:00:00'); // T00:00:00 evita desfasajes de zona horaria
+            let fechaBase = new Date(fechaActivacion + 'T00:00:00');
 
             for (let i = 1; i <= cantDosis; i++) {
                 let fechaProg = new Date(fechaBase);
                 fechaProg.setDate(fechaProg.getDate() + ((i - 1) * 7));
-                
                 dosisArray.push({
                     id_esquema: idEsquema,
                     numero_dosis: i,
@@ -215,18 +228,123 @@
                 });
             }
 
-            // 3. Guardar las dosis en bloque
-            const { error: dosisError } = await clienteSupabase
-                .from('aplicaciones_dosis')
-                .insert(dosisArray);
+            const { error: dosisError } = await clienteSupabase.from('aplicaciones_dosis').insert(dosisArray);
 
-            if (dosisError) {
-                alert("Error al programar dosis: " + dosisError.message);
-            } else {
+            if (dosisError) alert("Error al programar dosis: " + dosisError.message);
+            else {
                 document.getElementById('mensaje-exito-trat').classList.remove('hidden');
                 document.getElementById('formulario-tratamiento').reset();
                 setTimeout(() => document.getElementById('mensaje-exito-trat').classList.add('hidden'), 3000);
             }
+        }
+
+        // --- 3. MÓDULO LISTADO GENERAL ---
+        async function cargarListado() {
+            const tabla = document.getElementById('tabla-listado');
+            tabla.innerHTML = '<tr><td colspan="5" class="p-4 text-center">Cargando...</td></tr>';
+            
+            const { data, error } = await clienteSupabase
+                .from('pacientes')
+                .select('*')
+                .order('nombre_completo', { ascending: true });
+
+            if (error) {
+                tabla.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-500">Error: ${error.message}</td></tr>`;
+                return;
+            }
+
+            if (data.length === 0) {
+                tabla.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-gray-500">No hay pacientes registrados.</td></tr>';
+                return;
+            }
+
+            tabla.innerHTML = ''; // Limpia la tabla
+            data.forEach(p => {
+                tabla.innerHTML += `
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-3">${p.dni || '-'}</td>
+                        <td class="p-3 font-medium">${p.nombre_completo}</td>
+                        <td class="p-3">${p.telefono || '-'}</td>
+                        <td class="p-3">${p.direccion || '-'}</td>
+                        <td class="p-3"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">${p.tipo_caso}</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // --- 4. MÓDULO MOTOR DE ALERTAS ---
+        async function cargarAlertas() {
+            const tabla = document.getElementById('tabla-alertas');
+            tabla.innerHTML = '<tr><td colspan="5" class="p-4 text-center">Calculando alertas...</td></tr>';
+            
+            const hoy = new Date().toISOString().split('T')[0]; // Toma la fecha de hoy para comparar
+            
+            const { data, error } = await clienteSupabase
+                .from('aplicaciones_dosis')
+                .select(`
+                    id_dosis,
+                    numero_dosis,
+                    fecha_programada,
+                    esquemas_tratamiento!inner (
+                        pacientes!inner (
+                            nombre_completo,
+                            telefono
+                        )
+                    )
+                `)
+                .eq('estado_dosis', 'Pendiente')
+                .lte('fecha_programada', hoy)
+                .order('fecha_programada', { ascending: true });
+
+            if (error) {
+                tabla.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-500">Error: ${error.message}</td></tr>`;
+                return;
+            }
+
+            if (data.length === 0) {
+                tabla.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-green-600 font-bold">¡Todo al día! No hay alertas pendientes.</td></tr>';
+                return;
+            }
+
+            tabla.innerHTML = '';
+            data.forEach(alerta => {
+                const p = alerta.esquemas_tratamiento.pacientes;
+                
+                // Si la fecha programada es anterior a hoy, la marcamos en rojo
+                const esAtrasada = alerta.fecha_programada < hoy;
+                const estiloFila = esAtrasada ? "bg-red-50" : "";
+                const etiquetaFech = esAtrasada ? "⚠️ Atrasada" : "Hoy";
+
+                tabla.innerHTML += `
+                    <tr class="border-b hover:bg-gray-100 ${estiloFila}">
+                        <td class="p-3 font-bold">${p.nombre_completo}</td>
+                        <td class="p-3 text-blue-600">${p.telefono || 'Sin Nro.'}</td>
+                        <td class="p-3 text-center">Dosis ${alerta.numero_dosis}</td>
+                        <td class="p-3 text-center">
+                            ${alerta.fecha_programada.split('-').reverse().join('/')} 
+                            <span class="ml-2 text-xs font-bold text-red-600">${etiquetaFech}</span>
+                        </td>
+                        <td class="p-3 text-center">
+                            <button onclick="marcarAplicada(${alerta.id_dosis})" class="bg-green-500 text-white text-xs px-3 py-1 rounded hover:bg-green-600">Marcar Aplicada</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // --- 5. FUNCIÓN PARA ENFERMERÍA (APLICAR DOSIS) ---
+        async function marcarAplicada(idDosis) {
+            if(!confirm("¿Confirmas que se aplicó esta dosis hoy?")) return;
+            
+            const hoy = new Date().toISOString().split('T')[0];
+            
+            const { error } = await clienteSupabase
+                .from('aplicaciones_dosis')
+                .update({ estado_dosis: 'Aplicada', fecha_aplicacion: hoy })
+                .eq('id_dosis', idDosis);
+                
+            if (error) alert("Error al asentar dosis: " + error.message);
+            else cargarAlertas(); // Recarga la tabla para que esa persona desaparezca de las alertas
         }
     </script>
 </body>
