@@ -16,7 +16,8 @@
         </div>
         <nav class="flex-1 px-4 py-4 space-y-2">
             <button onclick="mostrarSeccion('alertas')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">🔔 Alertas Pendientes</button>
-            <button onclick="mostrarSeccion('nuevo')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">➕ Ingresar Paciente / Contacto</button>
+            <button onclick="mostrarSeccion('nuevo')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">➕ Ingresar Paciente</button>
+            <button onclick="mostrarSeccion('tratamiento')" class="w-full text-left px-4 py-2 rounded hover:bg-blue-600 bg-gray-700">💉 Asignar Tratamiento</button>
             <button onclick="mostrarSeccion('listado')" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700">📋 Listado y Seguimiento</button>
         </nav>
         <div class="p-4 border-t border-gray-700">
@@ -66,8 +67,35 @@
                     </div>
                     <button type="button" onclick="guardarPaciente()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Guardar Registro</button>
                 </form>
-                <!-- Mensaje de éxito oculto -->
                 <p id="mensaje-exito" class="text-green-600 font-bold mt-4 hidden">¡Paciente registrado con éxito!</p>
+            </div>
+        </section>
+
+        <!-- Módulo: Asignar Tratamiento -->
+        <section id="sec-tratamiento" class="seccion-app hidden">
+            <h1 class="text-2xl font-bold mb-4 border-b pb-2">Iniciar Esquema de Tratamiento</h1>
+            <div class="bg-white p-6 rounded shadow max-w-lg">
+                <form id="formulario-tratamiento" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium">Seleccionar Paciente</label>
+                        <select id="select_paciente" class="mt-1 w-full border rounded p-2">
+                            <option value="">Cargando pacientes...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Fecha de Activación (1ra Dosis)</label>
+                        <input type="date" id="fecha_activacion" class="mt-1 w-full border rounded p-2" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Esquema Prescrito (Penicilina)</label>
+                        <select id="cant_dosis" class="mt-1 w-full border rounded p-2">
+                            <option value="3" selected>3 Dosis (Sífilis Tardía / Indeterminada)</option>
+                            <option value="1">1 Dosis (Sífilis Temprana)</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="guardarTratamiento()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Programar Esquema</button>
+                </form>
+                <p id="mensaje-exito-trat" class="text-green-600 font-bold mt-4 hidden">¡Tratamiento y alertas programadas con éxito!</p>
             </div>
         </section>
 
@@ -83,32 +111,31 @@
     <script>
         const supabaseUrl = 'https://cxnajcsedyrgjrxywfio.supabase.co'; 
         const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; 
-        
         const clienteSupabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        // Verifica que nadie entre sin loguearse
         async function verificarSesion() {
             const { data: { session } } = await clienteSupabase.auth.getSession();
-            if (!session) {
-                window.location.href = 'ingreso.html';
-            }
+            if (!session) window.location.href = 'ingreso.html';
         }
         verificarSesion();
 
-        // Controla el menú lateral
         function mostrarSeccion(id) {
             const secciones = document.querySelectorAll('.seccion-app');
             secciones.forEach(sec => sec.classList.add('hidden'));
             document.getElementById('sec-' + id).classList.remove('hidden');
+            
+            // Si entra a tratamiento, carga los pacientes de la base de datos
+            if (id === 'tratamiento') {
+                cargarPacientesParaSelect();
+            }
         }
 
-        // Cierra sesión
         async function cerrarSesion() {
             await clienteSupabase.auth.signOut();
             window.location.href = 'ingreso.html';
         }
 
-        // Guarda el paciente en la base de datos
+        // --- FUNCIONES DE PACIENTES ---
         async function guardarPaciente() {
             const dni = document.getElementById('dni_paciente').value;
             const nombre = document.getElementById('nombre_paciente').value;
@@ -116,31 +143,89 @@
             const direccion = document.getElementById('direccion_paciente').value;
             const tipo = document.getElementById('tipo_caso').value;
 
-            if (nombre.trim() === '') {
-                alert("Por favor, ingresa el nombre del paciente.");
+            if (nombre.trim() === '') return alert("Ingresa el nombre.");
+
+            const { error } = await clienteSupabase.from('pacientes').insert([
+                { dni: dni, nombre_completo: nombre, telefono: telefono, direccion: direccion, tipo_caso: tipo }
+            ]);
+
+            if (error) alert("Error: " + error.message);
+            else {
+                document.getElementById('mensaje-exito').classList.remove('hidden');
+                document.getElementById('formulario-paciente').reset();
+                setTimeout(() => document.getElementById('mensaje-exito').classList.add('hidden'), 3000);
+            }
+        }
+
+        // --- FUNCIONES DE TRATAMIENTO Y DOSIS ---
+        async function cargarPacientesParaSelect() {
+            const select = document.getElementById('select_paciente');
+            select.innerHTML = '<option value="">Cargando...</option>';
+            
+            const { data, error } = await clienteSupabase
+                .from('pacientes')
+                .select('id_paciente, nombre_completo, dni')
+                .order('nombre_completo', { ascending: true });
+
+            if (error || !data) {
+                select.innerHTML = '<option value="">Error al cargar</option>';
                 return;
             }
 
-            const { data, error } = await clienteSupabase
-                .from('pacientes')
-                .insert([
-                    { 
-                        dni: dni, 
-                        nombre_completo: nombre, 
-                        telefono: telefono, 
-                        direccion: direccion, 
-                        tipo_caso: tipo 
-                    }
-                ]);
+            select.innerHTML = '<option value="">-- Seleccione un paciente --</option>';
+            data.forEach(paciente => {
+                let opcion = document.createElement('option');
+                opcion.value = paciente.id_paciente;
+                opcion.text = `${paciente.nombre_completo} (DNI: ${paciente.dni || 'S/D'})`;
+                select.appendChild(opcion);
+            });
+        }
 
-            if (error) {
-                alert("Hubo un error al guardar: " + error.message);
+        async function guardarTratamiento() {
+            const idPaciente = document.getElementById('select_paciente').value;
+            const fechaActivacion = document.getElementById('fecha_activacion').value;
+            const cantDosis = parseInt(document.getElementById('cant_dosis').value);
+
+            if (!idPaciente || !fechaActivacion) {
+                return alert("Selecciona un paciente y la fecha de activación.");
+            }
+
+            // 1. Guardar el esquema principal
+            const { data: esquemaData, error: esquemaError } = await clienteSupabase
+                .from('esquemas_tratamiento')
+                .insert([{ id_paciente: idPaciente, fecha_activacion: fechaActivacion }])
+                .select();
+
+            if (esquemaError) return alert("Error al crear esquema: " + esquemaError.message);
+
+            const idEsquema = esquemaData[0].id_esquema;
+
+            // 2. Calcular fechas y crear las dosis (separadas por 7 días)
+            let dosisArray = [];
+            let fechaBase = new Date(fechaActivacion + 'T00:00:00'); // T00:00:00 evita desfasajes de zona horaria
+
+            for (let i = 1; i <= cantDosis; i++) {
+                let fechaProg = new Date(fechaBase);
+                fechaProg.setDate(fechaProg.getDate() + ((i - 1) * 7));
+                
+                dosisArray.push({
+                    id_esquema: idEsquema,
+                    numero_dosis: i,
+                    fecha_programada: fechaProg.toISOString().split('T')[0]
+                });
+            }
+
+            // 3. Guardar las dosis en bloque
+            const { error: dosisError } = await clienteSupabase
+                .from('aplicaciones_dosis')
+                .insert(dosisArray);
+
+            if (dosisError) {
+                alert("Error al programar dosis: " + dosisError.message);
             } else {
-                document.getElementById('mensaje-exito').classList.remove('hidden');
-                document.getElementById('formulario-paciente').reset();
-                setTimeout(() => {
-                    document.getElementById('mensaje-exito').classList.add('hidden');
-                }, 3000);
+                document.getElementById('mensaje-exito-trat').classList.remove('hidden');
+                document.getElementById('formulario-tratamiento').reset();
+                setTimeout(() => document.getElementById('mensaje-exito-trat').classList.add('hidden'), 3000);
             }
         }
     </script>
