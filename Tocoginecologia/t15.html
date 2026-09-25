@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Gestión - Protocolo T-15</title>
-    <!-- Supabase y Tailwind -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -32,9 +31,8 @@
         <section id="sec-alertas" class="seccion-app">
             <h1 class="text-2xl font-bold mb-4 border-b pb-2">Alertas de Adherencia Semanal</h1>
             <p class="text-gray-600 mb-4">Pacientes que deben concurrir hoy para la aplicación de dosis.</p>
-            <div class="bg-white p-4 rounded shadow">
-                <!-- Aquí JavaScript inyectará la tabla de alertas -->
-                <p class="text-sm text-gray-500">Cargando datos...</p>
+            <div class="bg-white p-4 rounded shadow" id="contenedor-alertas">
+                <p class="text-sm text-gray-500">No hay alertas pendientes por el momento.</p>
             </div>
         </section>
 
@@ -42,24 +40,26 @@
         <section id="sec-nuevo" class="seccion-app hidden">
             <h1 class="text-2xl font-bold mb-4 border-b pb-2">Registrar Caso Índice o Contacto</h1>
             <div class="bg-white p-6 rounded shadow max-w-lg">
-                <form class="space-y-4">
+                <form id="formulario-paciente" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium">Nombre Completo</label>
-                        <input type="text" class="mt-1 w-full border rounded p-2">
+                        <input type="text" id="nombre_paciente" class="mt-1 w-full border rounded p-2" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium">Teléfono (Para citación)</label>
-                        <input type="text" class="mt-1 w-full border rounded p-2">
+                        <input type="text" id="telefono_paciente" class="mt-1 w-full border rounded p-2">
                     </div>
                     <div>
                         <label class="block text-sm font-medium">Tipo de Caso</label>
-                        <select class="mt-1 w-full border rounded p-2">
-                            <option>Caso Índice</option>
-                            <option>Contacto Sexual</option>
+                        <select id="tipo_caso" class="mt-1 w-full border rounded p-2">
+                            <option value="Caso Índice">Caso Índice</option>
+                            <option value="Contacto Sexual">Contacto Sexual</option>
                         </select>
                     </div>
-                    <button type="button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Guardar Registro</button>
+                    <button type="button" onclick="guardarPaciente()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Guardar Registro</button>
                 </form>
+                <!-- Mensaje de éxito oculto -->
+                <p id="mensaje-exito" class="text-green-600 font-bold mt-4 hidden">¡Paciente registrado con éxito!</p>
             </div>
         </section>
 
@@ -67,41 +67,67 @@
         <section id="sec-listado" class="seccion-app hidden">
             <h1 class="text-2xl font-bold mb-4 border-b pb-2">Pacientes en Seguimiento</h1>
             <div class="bg-white p-4 rounded shadow">
-                <p class="text-sm text-gray-500">Aquí se integrará el historial clínico digital simplificado.</p>
+                <p class="text-sm text-gray-500">Aquí aparecerá la lista de pacientes.</p>
             </div>
         </section>
     </main>
 
     <script>
-        // REEMPLAZA ESTOS VALORES (Los mismos que en ingreso.html)
         const supabaseUrl = 'https://cxnajcsedyrgjrxywfio.supabase.co'; 
         const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; 
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // Corrección del nombre de la variable
+        const clienteSupabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        // 1. Verificar si hay un usuario logueado al cargar la página
+        // Verifica que nadie entre sin loguearse
         async function verificarSesion() {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await clienteSupabase.auth.getSession();
             if (!session) {
-                // Si no hay sesión válida, lo expulsa al login
                 window.location.href = 'ingreso.html';
             }
         }
-        verificarSesion(); // Ejecutar validación inmediatamente
+        verificarSesion();
 
-        // 2. Función para navegar entre secciones simulando páginas distintas
+        // Controla el menú lateral
         function mostrarSeccion(id) {
-            // Oculta todas las secciones
             const secciones = document.querySelectorAll('.seccion-app');
             secciones.forEach(sec => sec.classList.add('hidden'));
-            
-            // Muestra solo la sección solicitada
             document.getElementById('sec-' + id).classList.remove('hidden');
         }
 
-        // 3. Función para salir de forma segura
+        // Cierra sesión
         async function cerrarSesion() {
-            const { error } = await supabase.auth.signOut();
+            await clienteSupabase.auth.signOut();
             window.location.href = 'ingreso.html';
+        }
+
+        // Guarda el paciente en la base de datos
+        async function guardarPaciente() {
+            const nombre = document.getElementById('nombre_paciente').value;
+            const telefono = document.getElementById('telefono_paciente').value;
+            const tipo = document.getElementById('tipo_caso').value;
+
+            if (nombre.trim() === '') {
+                alert("Por favor, ingresa el nombre del paciente.");
+                return;
+            }
+
+            const { data, error } = await clienteSupabase
+                .from('pacientes')
+                .insert([
+                    { nombre_completo: nombre, telefono: telefono, tipo_caso: tipo }
+                ]);
+
+            if (error) {
+                alert("Hubo un error al guardar: " + error.message);
+            } else {
+                // Muestra mensaje de éxito, limpia el formulario y oculta el mensaje a los 3 segundos
+                document.getElementById('mensaje-exito').classList.remove('hidden');
+                document.getElementById('formulario-paciente').reset();
+                setTimeout(() => {
+                    document.getElementById('mensaje-exito').classList.add('hidden');
+                }, 3000);
+            }
         }
     </script>
 </body>
