@@ -31,14 +31,16 @@
     </div>
 
     <script>
-        // REEMPLAZA ESTOS VALORES
         const supabaseUrl = 'https://cxnajcsedyrgjrxywfio.supabase.co'; 
-        const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; // La que empieza con sb_publishable_
+        const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; 
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function iniciarSesion() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+
+            // 1. Alerta para confirmar que el botón funciona
+            alert("Conectando con la base de datos...");
 
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: email,
@@ -46,9 +48,16 @@
             });
 
             if (error) {
-                document.getElementById('mensaje-error').classList.remove('hidden');
+                // 2. Alerta para mostrar el motivo exacto del rechazo
+                alert("Error detectado: " + error.message);
+                
+                // Muestra el error en pantalla en lugar del mensaje genérico
+                const errorDiv = document.getElementById('mensaje-error');
+                errorDiv.innerText = "Error: " + error.message;
+                errorDiv.classList.remove('hidden');
             } else {
-                // Si el login es exitoso, redirige al programa principal
+                // 3. Alerta de éxito antes de cambiar de página
+                alert("¡Acceso correcto! Redirigiendo al panel...");
                 window.location.href = 't15.html';
             }
         }
