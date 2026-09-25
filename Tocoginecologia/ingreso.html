@@ -30,33 +30,31 @@
         </div>
     </div>
 
-    <script>
+<script>
         const supabaseUrl = 'https://cxnajcsedyrgjrxywfio.supabase.co'; 
         const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; 
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // CORRECCIÓN: Le cambiamos el nombre a 'clienteSupabase'
+        const clienteSupabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function iniciarSesion() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // 1. Alerta para confirmar que el botón funciona
             alert("Conectando con la base de datos...");
 
-            const { data, error } = await supabase.auth.signInWithPassword({
+            // CORRECCIÓN: Usamos 'clienteSupabase' para validar
+            const { data, error } = await clienteSupabase.auth.signInWithPassword({
                 email: email,
                 password: password,
             });
 
             if (error) {
-                // 2. Alerta para mostrar el motivo exacto del rechazo
                 alert("Error detectado: " + error.message);
-                
-                // Muestra el error en pantalla en lugar del mensaje genérico
                 const errorDiv = document.getElementById('mensaje-error');
                 errorDiv.innerText = "Error: " + error.message;
                 errorDiv.classList.remove('hidden');
             } else {
-                // 3. Alerta de éxito antes de cambiar de página
                 alert("¡Acceso correcto! Redirigiendo al panel...");
                 window.location.href = 't15.html';
             }
