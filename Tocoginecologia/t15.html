@@ -42,12 +42,20 @@
             <div class="bg-white p-6 rounded shadow max-w-lg">
                 <form id="formulario-paciente" class="space-y-4">
                     <div>
+                        <label class="block text-sm font-medium">DNI</label>
+                        <input type="text" id="dni_paciente" class="mt-1 w-full border rounded p-2">
+                    </div>
+                    <div>
                         <label class="block text-sm font-medium">Nombre Completo</label>
                         <input type="text" id="nombre_paciente" class="mt-1 w-full border rounded p-2" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium">Teléfono (Para citación)</label>
                         <input type="text" id="telefono_paciente" class="mt-1 w-full border rounded p-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Domicilio (Para visita domiciliaria)</label>
+                        <input type="text" id="direccion_paciente" class="mt-1 w-full border rounded p-2">
                     </div>
                     <div>
                         <label class="block text-sm font-medium">Tipo de Caso</label>
@@ -76,7 +84,6 @@
         const supabaseUrl = 'https://cxnajcsedyrgjrxywfio.supabase.co'; 
         const supabaseKey = 'sb_publishable_UhDLg7iPmd2068IOdGgr6A_Y-YwonRE'; 
         
-        // Corrección del nombre de la variable
         const clienteSupabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // Verifica que nadie entre sin loguearse
@@ -103,8 +110,10 @@
 
         // Guarda el paciente en la base de datos
         async function guardarPaciente() {
+            const dni = document.getElementById('dni_paciente').value;
             const nombre = document.getElementById('nombre_paciente').value;
             const telefono = document.getElementById('telefono_paciente').value;
+            const direccion = document.getElementById('direccion_paciente').value;
             const tipo = document.getElementById('tipo_caso').value;
 
             if (nombre.trim() === '') {
@@ -115,13 +124,18 @@
             const { data, error } = await clienteSupabase
                 .from('pacientes')
                 .insert([
-                    { nombre_completo: nombre, telefono: telefono, tipo_caso: tipo }
+                    { 
+                        dni: dni, 
+                        nombre_completo: nombre, 
+                        telefono: telefono, 
+                        direccion: direccion, 
+                        tipo_caso: tipo 
+                    }
                 ]);
 
             if (error) {
                 alert("Hubo un error al guardar: " + error.message);
             } else {
-                // Muestra mensaje de éxito, limpia el formulario y oculta el mensaje a los 3 segundos
                 document.getElementById('mensaje-exito').classList.remove('hidden');
                 document.getElementById('formulario-paciente').reset();
                 setTimeout(() => {
