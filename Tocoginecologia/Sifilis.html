@@ -106,9 +106,17 @@
         .bg-danger { background-color: var(--danger); }
         .bg-success { background-color: var(--success); }
 
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .btn-home {
             display: inline-block;
-            margin-top: 30px;
             padding: 12px 25px;
             background: var(--primary);
             color: white;
@@ -118,6 +126,18 @@
         }
 
         .btn-home:hover { background: #1a252f; }
+
+        .btn-pdf {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--danger);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-pdf:hover { background: #c0392b; }
 
         .highlight-box {
             background: #fff4e5;
@@ -178,7 +198,7 @@
             </table>
             <div class="highlight-box">
                 <strong>Alternativa (No Embarazadas):</strong> Doxiciclina 100mg cada 12h VO (14 días para temprana / 28 días para tardía).• Ceftriaxona 1 gramo/día intramuscular o endovenoso por 14 días.
-• Azitromicina 2 gramos vía oral (única dosis).
+- Azitromicina 2 gramos vía oral (única dosis).
             </div>
         </div>
 
@@ -200,7 +220,8 @@
 
     </div>
 
-    <div style="text-align: center;">
+    <div class="btn-container">
+        <a href="pdf/PROTOCOLO SIFILIS EN GESTANTES Y EXPUESTOS PERINATALES CORRIENTES.pdf" target="_blank" class="btn-pdf">📄 Abrir Protocolo PDF</a>
         <a href="index.html" class="btn-home">← Volver al Menú Principal</a>
     </div>
 </div>
